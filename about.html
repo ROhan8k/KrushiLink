@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KrushiLink - Connecting Farmers to Resources</title>
+  <meta name="description" content="KrushiLink connects farmers in Maharashtra to trusted agro-stores, government schemes, and agricultural resources.">
+  <meta name="keywords" content="farmers, agro-stores, government schemes, agriculture, KrushiLink">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom CSS -->
+  <link href="about.css" rel="stylesheet">
+</head>
+<body>
+  <!-- ================= HEADER ================= -->
+  <header id="header" class="header fixed-top bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white container">
+      <div class="container navbar navbar-expand-lg navbar-light bg-white container">
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold" href="index.html">
+          Krushi<span class="text-success">Link</span>
+        </a>
+
+        <!-- Mobile toggle button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="store.html">Store</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Language
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                <li><a class="dropdown-item" href="#">English</a></li>
+                <li><a class="dropdown-item" href="#">Hindi</a></li>
+                <li><a class="dropdown-item" href="#">Marathi</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Login/Register buttons -->
+          <div id="authSection" class="d-flex ms-lg-3 gap-2">
+            <a class="btn btn-outline-success" href="login.html">Login</a>
+            <a class="btn btn-success text-white" href="register.html">Register</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- ================= /HEADER ================= -->
+
+<section id="about" class="about-section d-flex align-items-center text-center text-black">
+  <div class="overlay"></div>
+  <div class="container position-relative">
+    <h2 class="fw-bold fs-1 fs-md-2 fs-lg-1">About Us</h2>
+    <p class="lead fs-6 fs-md-5 fs-lg-4 mt-3">
+      We are dedicated to connecting farmers with the right resources,
+      empowering them with knowledge, technology, and support to achieve
+      sustainable growth.
+    </p>
+  </div>
+</section>
+
+  <!-- Mission Section -->
+  <section id="mission" class="py-5 bg-light">
+    <div class="container text-center">
+      <i class="bi bi-geo-alt-fill text-success fs-1 mb-3"></i>
+      <h2 class="mb-3">Our Mission</h2>
+      <p class="lead mb-4">
+        Our mission is to support farmers across Maharashtra by making it easy 
+        to find trusted agricultural resources nearby. We provide a platform 
+        where farmers can discover local stores, markets, and services, and share 
+        honest reviews to help each other avoid unreliable sources.
+      </p>
+
+      <!-- Centered Quote -->
+      <blockquote class="mission-quote">
+        "Helping every farmer find what they need, close to home."
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-5 bg-light">
+    <div class="container text-center">
+      <h2 class="mb-5">How It Works</h2>
+      <div class="row">
+        <!-- Step 1 -->
+        <div class="col-md-4 mb-4">
+          <div class="p-4 h-100 shadow-sm rounded bg-white">
+            <i class="bi bi-search fs-1 text-success mb-3"></i>
+            <h5>Step 1: Browse Resources</h5>
+            <p>Search for nearby agro-stores, markets, and services in Maharashtra without needing to log in.</p>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="col-md-4 mb-4">
+          <div class="p-4 h-100 shadow-sm rounded bg-white">
+            <i class="bi bi-chat-square-text fs-1 text-primary mb-3"></i>
+            <h5>Step 2: Share Your Experience</h5>
+            <p>Sign in to leave a review and share your experience with a store or service. Help others avoid fake or unreliable sources.</p>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="col-md-4 mb-4">
+          <div class="p-4 h-100 shadow-sm rounded bg-white">
+            <i class="bi bi-hand-thumbs-up fs-1 text-warning mb-3"></i>
+            <h5>Step 3: Build Trust</h5>
+            <p>Farmers benefit from verified information and honest reviews, creating a trusted community network.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section id="our-story" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4 fw-bold">Our Story</h2>
+      <p class="lead text-center mb-5">
+        What began as a <strong>small initiative in Maharashtra</strong> to guide local farmers 
+        to nearby resources has now grown into a <strong>community-driven platform</strong>. 
+        Our vision is simple – <em>connect farmers with trusted stores and services</em>, 
+        while ensuring transparency through reviews and feedback. 
+      </p>
+
+      <div class="row text-center g-4">
+        <div class="col-md-3 col-6">
+          <div class="story-card">
+            <i class="bi bi-flower1 icon-green"></i>
+            <h6>Started with just a few farmers</h6>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="story-card">
+            <i class="bi bi-people icon-blue"></i>
+            <h6>Built a network across Maharashtra</h6>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="story-card">
+            <i class="bi bi-star icon-yellow"></i>
+            <h6>Introduced review system</h6>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="story-card">
+            <i class="bi bi-globe icon-teal"></i>
+            <h6>Now connecting hundreds daily</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet the Team Section -->
+  <section id="team" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Meet Our Team</h2>
+      <div class="row justify-content-center">
+
+        <!-- Team Member 1 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="team-card text-center p-4 shadow-sm">
+            <img src="assets/images/about/lion-3576045_640.jpg" class="team-img mb-3" alt="Team Member">
+            <h5 class="team-name">Rohan Rathour</h5>
+            <p class="team-role">Founder & CEO</p>
+          </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="team-card text-center p-4 shadow-sm">
+            <img src="assets/images/about/animal-19621_640.jpg" class="team-img mb-3" alt="Team Member">
+            <h5 class="team-name">Vijay Kamat</h5>
+            <p class="team-role">CTO</p>
+          </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="team-card text-center p-4 shadow-sm">
+            <img src="assets/images/about/animal-7451969_640.jpg" class="team-img mb-3" alt="Team Member">
+            <h5 class="team-name">Adi Bheem</h5>
+            <p class="team-role">Head of Operations</p>
+          </div>
+        </div>
+
+        <!-- Team Member 4 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="team-card text-center p-4 shadow-sm">
+            <img src="assets/images/about/fox-715588_640.jpg" class="team-img mb-3" alt="Team Member">
+            <h5 class="team-name">Shailesh Kumar</h5>
+            <p class="team-role">Marketing Lead</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+      
+      <div class="accordion" id="faqAccordion">
+        
+        <!-- Question 1 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq1-heading">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+              How does this platform help farmers?
+            </button>
+          </h2>
+          <div id="faq1" class="accordion-collapse collapse show" aria-labelledby="faq1-heading" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              We connect farmers with nearby trusted stores and services. Farmers can easily find fertilizers, seeds, equipment, and other farming resources in one place.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq2-heading">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+              Is the platform free for farmers?
+            </button>
+          </h2>
+          <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faq2-heading" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              No, our platform is completely free to use. Farmers can browse nearby stores and check reviews. Through reviews, they can also identify fake stores, bad experiences, or misleading schemes.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Question 3 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq3-heading">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+              How do reviews work?
+            </button>
+          </h2>
+          <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faq3-heading" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Farmers can rate and leave feedback for stores they use. This helps others know if the store is genuine, how their experience was, and avoid fake or unreliable sellers.
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq4-heading">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+              Can farmers from outside Maharashtra join?
+            </button>
+          </h2>
+          <div id="faq4" class="accordion-collapse collapse" aria-labelledby="faq4-heading" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Currently, we are focused only on Maharashtra. Expanding to other states is a possible future upgrade, but at the moment we provide information only within Maharashtra.
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq5-heading">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+              How do I become part of the network?
+            </button>
+          </h2>
+          <div id="faq5" class="accordion-collapse collapse" aria-labelledby="faq5-heading" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Simply sign up or log in to the platform. Once logged in, farmers can explore stores, check details, and share their reviews. There’s no extra verification or community connection — the aim is only to provide accurate and useful information.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer id="footer" class="footer bg-dark text-white pt-5">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6">
+          <h5 class="fw-bold">KrushiLink</h5>
+          <p>Connecting farmers with resources, trusted stores, and government schemes across Maharashtra.</p>
+          <p class="mb-1"><i class="bi bi-telephone"></i> +91 1234567890</p>
+          <p><i class="bi bi-envelope"></i> info@krushilink.com</p>
+          <div class="d-flex gap-3 mt-3">
+            <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h6 class="fw-bold">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li><a href="index.html" class="text-white-50">Home</a></li>
+            <li><a href="about.html" class="text-white-50">About</a></li>
+            <li><a href="store.html" class="text-white-50">Store</a></li>
+            <li><a href="contact.html" class="text-white-50">Contact</a></li>
+            <li><a href="terms.html" class="text-white-50">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center border-top border-secondary pt-3 mt-4">
+        <p class="mb-0">&copy; 2025 <strong>KrushiLink</strong>. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+<!-- ================= /FOOTER ================= -->
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="assets/scripts/auth.js"></script>
+</body>
+
+</html>

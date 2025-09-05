@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KrushiLink - Connecting Farmers to Resources</title>
+  <meta name="description" content="KrushiLink connects farmers in Maharashtra to trusted agro-stores, government schemes, and agricultural resources.">
+  <meta name="keywords" content="farmers, agro-stores, government schemes, agriculture, KrushiLink">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom CSS -->
+  <link href="store.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+  <header id="header" class="header fixed-top bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white container">
+      <a class="navbar-brand fw-bold" href="index.html">Krushi<span class="text-success">Link</span></a>
+      
+      <!-- Mobile toggle button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="store.html">Store</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Language
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+              <li><a class="dropdown-item" href="#">English</a></li>
+              <li><a class="dropdown-item" href="#">Hindi</a></li>
+              <li><a class="dropdown-item" href="#">Marathi</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Login/Register buttons -->
+        <div id="authSection" class="d-flex ms-lg-3 gap-2">
+          <a class="btn btn-outline-success" href="login.html">Login</a>
+          <a class="btn btn-success text-white" href="register.html">Register</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- /Header -->
+
+<!-- ================= STORE SECTION ================= -->
+  <section class="store-section container py-5">
+    <!-- Heading -->
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Stores in Maharashtra</h2>
+      <p class="text-muted">Find government and private agro-stores across Maharashtra</p>
+    </div>
+
+    <!-- Filter Box -->
+    <div class="filter-box shadow-sm p-4 rounded mb-4">
+      <h5 class="fw-bold mb-3">Find Stores</h5>
+      <form id="filterForm" class="row g-3 align-items-end">
+        <div class="col-md-3">
+          <label class="form-label">Type</label>
+          <select class="form-select" id="filterType">
+            <option value="All">All</option>
+            <option value="Government">Government</option>
+            <option value="Private">Private</option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">District</label>
+          <select class="form-select" id="filterDistrict">
+            <option value="All">All Districts</option>
+            <option>Pune</option>
+            <option>Nagpur</option>
+            <option>Nashik</option>
+            <option>Kolhapur</option>
+            <option>Aurangabad</option>
+            <option>Solapur</option>
+            <option>Sangli</option>
+            <option>Thane</option>
+            <option>Satara</option>
+            <option>Amravati</option>
+            <option>Ahmednagar</option>
+            <!-- Add all Maharashtra districts -->
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">City</label>
+          <select class="form-select" id="filterCity">
+            <option value="All">All Cities</option>
+            <option>Pune</option>
+            <option>Nagpur</option>
+            <option>Nashik</option>
+            <option>Kolhapur</option>
+            <option>Aurangabad</option>
+            <option>Solapur</option>
+            <option>Sangli</option>
+            <option>Thane</option>
+            <option>Satara</option>
+            <option>Amravati</option>
+            <option>Ahmednagar</option>
+            <!-- Add more cities from districts -->
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Taluka</label>
+          <select class="form-select" id="filterTaluka">
+            <option value="All">All Talukas</option>
+            <option>Haveli</option>
+            <option>Khed</option>
+            <option>Maval</option>
+            <option>Daund</option>
+            <option>Baramati</option>
+            <option>Karveer</option>
+            <option>Miraj</option>
+            <!-- Add talukas properly under each district -->
+          </select>
+        </div>
+
+        <div class="col-12 text-center mt-3">
+          <button type="button" class="btn btn-success px-4 me-2" onclick="applyFilters()">Apply Filters</button>
+          <button type="button" class="btn btn-outline-secondary px-4" onclick="resetFilters()">Clear</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Store Results -->
+    <div class="store-results shadow-sm p-4 rounded">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0">Available Stores</h5>
+        <span id="storeCount" class="text-muted">Showing 0</span>
+      </div>
+
+      <div class="row g-4" id="storeList">
+        <!-- Store Card Example -->
+        <div class="col-md-6 col-lg-3 store-card" data-type="Government" data-district="Pune" data-city="Pune" data-taluka="Haveli">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="https://via.placeholder.com/400x200.png?text=Maharashtra+Agro+Store" class="card-img-top" alt="Maharashtra Agro Store">
+            <div class="card-body">
+              <h6 class="fw-bold">Maharashtra Agro Store</h6>
+              <p class="text-muted small">Government • Pune</p>
+              <p class="small">Trusted govt store with subsidies and schemes.</p>
+              <button class="btn btn-outline-success btn-sm w-100" onclick="viewStore(this)">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 store-card" data-type="Private" data-district="Nagpur" data-city="Nagpur" data-taluka="Nagpur">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="https://via.placeholder.com/400x200.png?text=Agro+Mart+Pvt+Ltd" class="card-img-top" alt="Agro Mart Pvt Ltd">
+            <div class="card-body">
+              <h6 class="fw-bold">Agro Mart Pvt. Ltd.</h6>
+              <p class="text-muted small">Private • Nagpur</p>
+              <p class="small">Wide variety of seeds, fertilizers, tools.</p>
+              <button class="btn btn-outline-success btn-sm w-100" onclick="viewStore(this)">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 store-card" data-type="Government" data-district="Nashik" data-city="Nashik" data-taluka="Nashik">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="https://via.placeholder.com/400x200.png?text=Krushi+Govt+Center" class="card-img-top" alt="Krushi Govt Center">
+            <div class="card-body">
+              <h6 class="fw-bold">Krushi Govt Center</h6>
+              <p class="text-muted small">Government • Nashik</p>
+              <p class="small">Govt-backed support & seasonal schemes.</p>
+              <button class="btn btn-outline-success btn-sm w-100" onclick="viewStore(this)">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 store-card" data-type="Private" data-district="Kolhapur" data-city="Kolhapur" data-taluka="Karveer">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="https://via.placeholder.com/400x200.png?text=GreenGrow+Agro" class="card-img-top" alt="GreenGrow Agro">
+            <div class="card-body">
+              <h6 class="fw-bold">GreenGrow Agro</h6>
+              <p class="text-muted small">Private • Kolhapur</p>
+              <p class="small">Top-quality farming equipment and supplies.</p>
+              <button class="btn btn-outline-success btn-sm w-100" onclick="viewStore(this)">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer" class="footer bg-dark text-white pt-5">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6">
+          <h5 class="fw-bold">KrushiLink</h5>
+          <p>Connecting farmers with resources, trusted stores, and government schemes across Maharashtra.</p>
+          <p class="mb-1"><i class="bi bi-telephone"></i> +91 1234567890</p>
+          <p><i class="bi bi-envelope"></i> info@krushilink.com</p>
+          <div class="d-flex gap-3 mt-3">
+            <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h6 class="fw-bold">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li><a href="index.html" class="text-white-50">Home</a></li>
+            <li><a href="about.html" class="text-white-50">About</a></li>
+            <li><a href="store.html" class="text-white-50">Store</a></li>
+            <li><a href="contact.html" class="text-white-50">Contact</a></li>
+            <li><a href="terms.html" class="text-white-50">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center border-top border-secondary pt-3 mt-4">
+        <p class="mb-0">&copy; 2025 <strong>KrushiLink</strong>. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  (function () {
+    // ----- Helpers -----
+    const $ = (sel, ctx=document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+
+    const typeEl = $('#filterType');
+    const districtEl = $('#filterDistrict');
+    const cityEl = $('#filterCity');
+    const categoryEl = $('#filterCategory');
+    const applyBtn = $('#applyFilters');
+    const clearBtn = $('#clearFilters');
+    const resultCountEl = $('#resultCount');
+    const grid = $('#storesGrid');
+    const noResults = $('#noResults');
+
+    const cards = $$('.store-col');
+
+    // Build District -> Cities map from card dataset
+    const index = {};
+    cards.forEach(card => {
+      const d = card.dataset.district;  // lowercase
+      const c = card.dataset.city;
+      if (!index[d]) index[d] = new Set();
+      index[d].add(c);
+    });
+
+    // Populate District select
+    const addOption = (select, value, label) => {
+      const opt = document.createElement('option');
+      opt.value = value; opt.textContent = label;
+      select.appendChild(opt);
+    };
+
+    Object.keys(index).sort().forEach(d => {
+      addOption(districtEl, d, capitalize(d));
+    });
+
+    // Update City select when District changes
+    districtEl.addEventListener('change', () => {
+      cityEl.innerHTML = '';
+      addOption(cityEl, 'all', 'All Cities');
+      if (districtEl.value === 'all') {
+        cityEl.disabled = true;
+      } else {
+        cityEl.disabled = false;
+        const cities = Array.from(index[districtEl.value]).sort();
+        cities.forEach(c => addOption(cityEl, c, capitalize(c)));
+      }
+    });
+
+    // Apply filtering
+    function applyFilters() {
+      const type = typeEl.value;           // all | government | private
+      const district = districtEl.value;   // all | district
+      const city = cityEl.value;           // all | city
+      const category = categoryEl.value;   // all | seeds | fertilizers | equipment
+
+      let shown = 0;
+      cards.forEach(card => {
+        const matchType = (type === 'all') || (card.dataset.type === type);
+        const matchDistrict = (district === 'all') || (card.dataset.district === district);
+        const matchCity = (city === 'all') || (card.dataset.city === city);
+        const cats = (card.dataset.category || '').split(',').map(s => s.trim());
+        const matchCategory = (category === 'all') || cats.includes(category);
+
+        const visible = matchType && matchDistrict && matchCity && matchCategory;
+        card.classList.toggle('d-none', !visible);
+        if (visible) shown++;
+      });
+
+      resultCountEl.textContent = `Showing ${shown} ${shown === 1 ? 'store' : 'stores'}`;
+      noResults.classList.toggle('d-none', shown !== 0);
+    }
+
+    // Clear filters
+    function clearFilters() {
+      typeEl.value = 'all';
+      districtEl.value = 'all';
+      cityEl.innerHTML = '';
+      addOption(cityEl, 'all', 'All Cities');
+      cityEl.disabled = true;
+      categoryEl.value = 'all';
+      applyFilters();
+    }
+
+    applyBtn.addEventListener('click', applyFilters);
+    clearBtn.addEventListener('click', clearFilters);
+
+    // Initial state
+    cityEl.disabled = true;
+    applyFilters();
+
+    // ---- Comments scaffold (front-end only) ----
+    // Consider user "logged in" if localStorage.kl_user exists.
+    // Hook your register/login to set: localStorage.setItem('kl_user', JSON.stringify({ email: '...' }))
+    const isLoggedIn = !!localStorage.getItem('kl_user');
+
+    function renderCommentBox() {
+      $$('.comment-box').forEach(box => {
+        const storeId = box.dataset.store;
+        box.innerHTML = isLoggedIn
+          ? `
+            <div class="mb-2">
+              <textarea class="form-control comment-input" rows="2" placeholder="Share your experience..." data-comment-input="${storeId}"></textarea>
+            </div>
+            <div class="d-flex justify-content-end comment-actions">
+              <button class="btn btn-success btn-sm" data-comment-submit="${storeId}">Post</button>
+            </div>
+          `
+          : `<p class="text-muted small mb-0">Login or register to leave a comment.</p>`;
+      });
+    }
+
+    function loadComments(storeId) {
+      const key = `kl_comments_${storeId}`;
+      try {
+        const data = JSON.parse(localStorage.getItem(key) || '[]');
+        return Array.isArray(data) ? data : [];
+      } catch { return []; }
+    }
+
+    function saveComments(storeId, comments) {
+      localStorage.setItem(`kl_comments_${storeId}`, JSON.stringify(comments));
+    }
+
+    function renderComments(storeId) {
+      const listEl = $(`[data-store-list="${storeId}"]`);
+      if (!listEl) return;
+      const comments = loadComments(storeId);
+      listEl.innerHTML = comments.map(c => `
+        <li class="border rounded p-2 mb-2">
+          <div class="small text-muted">${new Date(c.time).toLocaleString()}</div>
+          <div>${escapeHtml(c.text)}</div>
+        </li>
+      `).join('');
+    }
+
+    // Post handler
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-comment-submit]');
+      if (!btn) return;
+      const storeId = btn.getAttribute('data-comment-submit');
+      const input = $(`[data-comment-input="${storeId}"]`);
+      if (!input || !input.value.trim()) return;
+
+      const comments = loadComments(storeId);
+      comments.unshift({ text: input.value.trim(), time: Date.now() });
+      saveComments(storeId, comments);
+      input.value = '';
+      renderComments(storeId);
+    });
+
+    // Init comments UI
+    renderCommentBox();
+    ['store1','store2','store3','store4'].forEach(renderComments);
+
+    // Utils
+    function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, m => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+      }[m]));
+    }
+  })();
+  </script>
+  <script type="module" src="assets/scripts/auth.js"></script>
+</body>
+
+</html>
