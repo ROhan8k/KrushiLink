@@ -42,23 +42,54 @@ function renderAuthUI(user) {
 }
 
 /* ========= Register ========= */
-/* ========= Register ========= */
 async function handleRegister(e) {
   e.preventDefault();
   const form = e.target;
 
-  if (!form.checkValidity()) {
-    form.classList.add("was-validated");
-    return;
-  }
-
+  // Get form elements
   const fullName = document.getElementById("fullname")?.value?.trim() || "";
   const email = document.getElementById("email")?.value?.trim();
   const password = document.getElementById("password")?.value;
   const confirmPassword = document.getElementById("confirmPassword")?.value;
 
-  if (password !== confirmPassword) {
-    alert("Passwords do not match");
+  // Reset previous validation states
+  form.classList.remove("was-validated");
+  clearCustomValidation(form);
+
+  let hasErrors = false;
+
+  // Validate full name
+  if (!fullName || fullName.length < 3) {
+    showFieldError("fullname", "Full name must be at least 3 characters");
+    hasErrors = true;
+  }
+
+  // Validate email
+  if (!email || !isValidEmail(email)) {
+    showFieldError("email", "Please enter a valid email address");
+    hasErrors = true;
+  }
+
+  // Validate password
+  if (!password) {
+    showFieldError("password", "Password is required");
+    hasErrors = true;
+  } else if (!isStrongPassword(password)) {
+    showFieldError("password", "Password must be 8-20 characters with uppercase, lowercase, number & special character");
+    hasErrors = true;
+  }
+
+  // Validate confirm password
+  if (!confirmPassword) {
+    showFieldError("confirmPassword", "Please confirm your password");
+    hasErrors = true;
+  } else if (password !== confirmPassword) {
+    showFieldError("confirmPassword", "Passwords do not match");
+    hasErrors = true;
+  }
+
+  if (hasErrors) {
+    form.classList.add("was-validated");
     return;
   }
 
@@ -103,19 +134,46 @@ async function handleLogin(e) {
   e.preventDefault();
   const form = e.target;
 
-  if (!form.checkValidity()) {
-    form.classList.add("was-validated");
-    return;
-  }
-
+  // Get form elements
   const email = document.getElementById("loginEmail")?.value?.trim();
   const password = document.getElementById("loginPassword")?.value;
   const rememberMe = document.getElementById("rememberMe")?.checked;
 
+  // Reset previous validation states
+  form.classList.remove("was-validated");
+  clearCustomValidation(form);
+
+  let hasErrors = false;
+
+  // Validate email
+  if (!email) {
+    showFieldError("loginEmail", "Email is required");
+    hasErrors = true;
+  } else if (!isValidEmail(email)) {
+    showFieldError("loginEmail", "Please enter a valid email address");
+    hasErrors = true;
+  }
+
+  // Validate password
+  if (!password) {
+    showFieldError("loginPassword", "Password is required");
+    hasErrors = true;
+  }
+
+  if (hasErrors) {
+    form.classList.add("was-validated");
+    return;
+  }
+
   try {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
-      alert("Incorrect email or password");
+      if (error.message.includes("Invalid login credentials")) {
+        showFieldError("loginPassword", "Incorrect email or password");
+        form.classList.add("was-validated");
+      } else {
+        alert("Login failed: " + error.message);
+      }
       return;
     }
 
@@ -198,9 +256,129 @@ async function handleReset(e) {
   }
 }
 
+/* ========= Validation Helper Functions ========= */
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function isStrongPassword(password) {
+  // At least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
+  const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,20}$/;
+  return strongPasswordRegex.test(password);
+}
+
+function showFieldError(fieldId, message) {
+  const field = document.getElementById(fieldId);
+  if (!field) return;
+
+  // Add invalid class
+  field.classList.add("is-invalid");
+  field.classList.remove("is-valid");
+
+  // Find or create feedback div
+  let feedback = field.parentNode.querySelector(".invalid-feedback");
+  if (!feedback) {
+    feedback = document.createElement("div");
+    feedback.className = "invalid-feedback";
+    field.parentNode.appendChild(feedback);
+  }
+  feedback.textContent = message;
+  feedback.style.display = "block";
+}
+
+function showFieldSuccess(fieldId) {
+  const field = document.getElementById(fieldId);
+  if (!field) return;
+
+  field.classList.add("is-valid");
+  field.classList.remove("is-invalid");
+  
+  const feedback = field.parentNode.querySelector(".invalid-feedback");
+  if (feedback) {
+    feedback.style.display = "none";
+  }
+}
+
+function clearCustomValidation(form) {
+  // Remove all custom validation classes and hide feedback messages
+  const fields = form.querySelectorAll(".form-control");
+  fields.forEach(field => {
+    field.classList.remove("is-invalid", "is-valid");
+  });
+  
+  const feedbacks = form.querySelectorAll(".invalid-feedback");
+  feedbacks.forEach(feedback => {
+    feedback.style.display = "none";
+  });
+}
+
+/* ========= Real-time Validation ========= */
+function setupRealTimeValidation() {
+  // Password confirmation validation
+  const password = document.getElementById("password");
+  const confirmPassword = document.getElementById("confirmPassword");
+  
+  if (confirmPassword) {
+    confirmPassword.addEventListener("input", () => {
+      const passwordValue = password?.value || "";
+      const confirmValue = confirmPassword.value;
+      
+      if (!confirmValue) {
+        showFieldError("confirmPassword", "Please confirm your password");
+      } else if (passwordValue !== confirmValue) {
+        showFieldError("confirmPassword", "Passwords do not match");
+      } else {
+        showFieldSuccess("confirmPassword");
+      }
+    });
+  }
+  
+  // Password strength validation
+  if (password) {
+    password.addEventListener("input", () => {
+      const value = password.value;
+      
+      if (!value) {
+        showFieldError("password", "Password is required");
+      } else if (!isStrongPassword(value)) {
+        showFieldError("password", "Password must be 8-20 characters with uppercase, lowercase, number & special character");
+      } else {
+        showFieldSuccess("password");
+        
+        // Revalidate confirm password if it exists
+        if (confirmPassword && confirmPassword.value) {
+          const event = new Event('input');
+          confirmPassword.dispatchEvent(event);
+        }
+      }
+    });
+  }
+  
+  // Email validation
+  const emails = ["email", "loginEmail"];
+  emails.forEach(emailId => {
+    const emailField = document.getElementById(emailId);
+    if (emailField) {
+      emailField.addEventListener("blur", () => {
+        const value = emailField.value.trim();
+        
+        if (!value) {
+          showFieldError(emailId, "Email is required");
+        } else if (!isValidEmail(value)) {
+          showFieldError(emailId, "Please enter a valid email address");
+        } else {
+          showFieldSuccess(emailId);
+        }
+      });
+    }
+  });
+}
+
 /* ========= Init ========= */
 document.addEventListener("DOMContentLoaded", async () => {
   setupTogglePassword();
+  setupRealTimeValidation();
 
   // Restore session if reset link contains tokens
   if (window.location.hash.includes("access_token")) {
