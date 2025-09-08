@@ -96,32 +96,16 @@ class KrushiLinkDB {
 
   async getAllStores() {
     try {
-      // Fetch stores from Supabase with their related schemes
-      const { data: stores, error } = await supabase
-        .from('stores')
-        .select(`
-          *,
-          schemes (
-            id,
-            name,
-            description,
-            subsidy_percentage,
-            eligibility,
-            application_process
-          )
-        `)
-        .order('id');
-      
-      if (error) {
-        console.error('Error fetching stores:', error);
-        // Return fallback data if Supabase API fails
-        return this.getFallbackStores();
+      // Fetch stores from our local API
+      const response = await fetch('/api/stores');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
-      return stores || this.getFallbackStores();
+      const stores = await response.json();
+      return stores;
     } catch (error) {
       console.error('Error fetching stores:', error);
-      // Return fallback data if there's any connection issue
+      // Return fallback data if API fails
       return this.getFallbackStores();
     }
   }
@@ -263,29 +247,11 @@ class KrushiLinkDB {
 
   async getStoreById(id) {
     try {
-      const { data: store, error } = await supabase
-        .from('stores')
-        .select(`
-          *,
-          schemes (
-            id,
-            name,
-            description,
-            subsidy_percentage,
-            eligibility,
-            application_process
-          )
-        `)
-        .eq('id', id)
-        .single();
-      
-      if (error) {
-        console.error('Error fetching store:', error);
-        // Return fallback data for this specific store
-        const fallbackStores = this.getFallbackStores();
-        return fallbackStores.find(store => store.id === parseInt(id)) || null;
+      const response = await fetch(`/api/stores/${id}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+      const store = await response.json();
       return store;
     } catch (error) {
       console.error('Error fetching store by ID:', error);
@@ -297,46 +263,33 @@ class KrushiLinkDB {
 
   async filterStores(filters) {
     try {
-      let query = supabase
-        .from('stores')
-        .select(`
-          *,
-          schemes (
-            id,
-            name,
-            description,
-            subsidy_percentage,
-            eligibility,
-            application_process
-          )
-        `);
+      const params = new URLSearchParams();
       
-      // Apply district filter
       if (filters.district && filters.district !== 'all') {
-        query = query.ilike('district', filters.district);
+        params.append('district', filters.district);
       }
       
-      // Apply type filter
       if (filters.type && filters.type !== 'all') {
-        query = query.eq('type', filters.type);
+        params.append('type', filters.type);
       }
       
-      // Apply resource type filter
       if (filters.resource && filters.resource !== 'all') {
-        // Filter stores that have the selected resource in their services array
-        query = query.contains('services', [filters.resource]);
+        params.append('resource', filters.resource);
       }
       
-      const { data: stores, error } = await query.order('id');
-      
-      if (error) {
-        console.error('Error filtering stores:', error);
-        return [];
+      if (filters.search) {
+        params.append('search', filters.search);
       }
       
-      return stores || [];
+      const response = await fetch(`/api/stores/filter?${params.toString()}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const stores = await response.json();
+      return stores;
     } catch (error) {
-      console.error('Error in filterStores:', error);
+      console.error('Error filtering stores:', error);
       return [];
     }
   }
@@ -345,22 +298,14 @@ class KrushiLinkDB {
 
   async getComments(storeId) {
     try {
-      const { data: comments, error } = await supabase
-        .from('comments')
-        .select('*')
-        .eq('store_id', storeId)
-        .order('created_at', { ascending: false });
-      
-      if (error) {
-        console.error('Error fetching comments:', error);
-        // Return empty array for now, comments will work once Supabase API is properly set up
-        return [];
+      const response = await fetch(`/api/stores/${storeId}/comments`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
-      return comments || [];
+      const comments = await response.json();
+      return comments;
     } catch (error) {
-      console.error('Error in getComments:', error);
-      // Return empty array for now, comments will work once Supabase API is properly set up
+      console.error('Error fetching comments:', error);
       return [];
     }
   }
@@ -372,24 +317,25 @@ class KrushiLinkDB {
 
     try {
       const newComment = {
-        store_id: parseInt(storeId),
         user_email: this.currentUser.email,
         user_name: this.currentUser.user_metadata?.fullName || this.currentUser.email.split('@')[0],
         comment: comment.trim(),
         rating: parseInt(rating)
       };
 
-      const { data, error } = await supabase
-        .from('comments')
-        .insert([newComment])
-        .select()
-        .single();
+      const response = await fetch(`/api/stores/${storeId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newComment)
+      });
       
-      if (error) {
-        console.error('Error adding comment:', error);
-        throw new Error('Failed to add comment. Please try again.');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       
+      const data = await response.json();
       return data;
     } catch (error) {
       console.error('Error in addComment:', error);
@@ -403,28 +349,19 @@ class KrushiLinkDB {
     }
 
     try {
-      // First, check if the comment exists and belongs to the current user
-      const { data: comment, error: fetchError } = await supabase
-        .from('comments')
-        .select('*')
-        .eq('id', commentId)
-        .eq('store_id', storeId)
-        .eq('user_email', this.currentUser.email)
-        .single();
+      const response = await fetch(`/api/comments/${commentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_email: this.currentUser.email
+        })
+      });
       
-      if (fetchError || !comment) {
-        throw new Error('Comment not found or you can only delete your own comments');
-      }
-      
-      // Delete the comment
-      const { error: deleteError } = await supabase
-        .from('comments')
-        .delete()
-        .eq('id', commentId);
-      
-      if (deleteError) {
-        console.error('Error deleting comment:', deleteError);
-        throw new Error('Failed to delete comment. Please try again.');
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to delete comment');
       }
       
       return true;
