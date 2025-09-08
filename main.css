@@ -189,12 +189,21 @@ a:hover {
   padding-bottom: 2rem;
 }
 
+/* Hero section image styling */
+#hero img {
+  max-height: 350px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 /* Ensure hero section doesn't take full height to prevent scrolling */
 .min-vh-75 {
   min-height: 75vh;
 }
 
 /* Hero responsive adjustments */
+/* Tablet and mobile responsive styling */
 @media (max-width: 991.98px) {
   #hero {
     padding-top: 1rem;
@@ -221,6 +230,38 @@ a:hover {
   #hero .btn {
     margin-top: 1rem;
   }
+  
+  /* Reduce image size for tablets */
+  .hero img,
+  #hero img {
+    max-height: 250px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Mobile specific styling */
+@media (max-width: 768px) {
+  #hero {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  #hero h1 {
+    font-size: 2rem;
+  }
+  
+  #hero .lead {
+    font-size: 1rem;
+  }
+  
+  /* Further reduce image size for mobile */
+  .hero img,
+  #hero img {
+    max-height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
 .hero h1 {
@@ -235,8 +276,19 @@ a:hover {
 }
 
 .hero img {
-  max-height: 500px;
+  max-height: 350px;
   object-fit: cover;
+}
+
+/* Desktop/Laptop specific styling */
+@media (min-width: 992px) {
+  #hero .col-lg-7 {
+    text-align: center;
+  }
+  
+  .hero img {
+    max-height: 400px;
+  }
 }
 
 .btn{
