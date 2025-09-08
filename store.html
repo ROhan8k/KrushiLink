@@ -310,11 +310,11 @@
               </div>
 
               <!-- Rating -->
-              ${store.rating > 0 ? `
+              ${store.avg_rating > 0 ? `
                 <div class="mb-3">
                   <div class="d-flex align-items-center">
-                    <div class="me-2">${window.krushiDB.generateStars(store.rating)}</div>
-                    <small class="text-muted">${store.rating}/5</small>
+                    <div class="me-2">${window.krushiDB.generateStars(store.avg_rating)}</div>
+                    <small class="text-muted">${parseFloat(store.avg_rating).toFixed(1)}/5</small>
                   </div>
                 </div>
               ` : `
@@ -453,9 +453,9 @@
             <div class="mb-3">
               <h6>Rating</h6>
               <div class="d-flex align-items-center">
-                <div class="me-2">${window.krushiDB.generateStars(store.rating)}</div>
-                <span class="fw-bold">${store.rating}/5</span>
-                <small class="text-muted ms-2">(${comments.length} reviews)</small>
+                <div class="me-2">${window.krushiDB.generateStars(store.avg_rating || 0)}</div>
+                <span class="fw-bold">${parseFloat(store.avg_rating || 0).toFixed(1)}/5</span>
+                <small class="text-muted ms-2">(${store.total_reviews || comments.length} reviews)</small>
               </div>
             </div>
           </div>
