@@ -141,7 +141,7 @@ class KrushiLinkDB {
         description: 'Government agricultural store providing subsidized seeds, fertilizers and farming equipment with various schemes available.',
         services: ['Seeds', 'Fertilizers', 'Pesticides', 'Farm Equipment', 'Government Schemes'],
         contact_person: 'Mr. Rajesh Patil',
-        rating: 4.2,
+        rating: 0,
         is_verified: true,
         schemes: [
           {
@@ -168,7 +168,7 @@ class KrushiLinkDB {
         description: 'District agricultural extension center providing technical support and government scheme assistance.',
         services: ['Technical Support', 'Soil Testing', 'Seeds', 'Government Schemes', 'Training Programs'],
         contact_person: 'Dr. Priya Sharma',
-        rating: 4.5,
+        rating: 0,
         is_verified: true,
         schemes: [
           {
@@ -195,7 +195,7 @@ class KrushiLinkDB {
         description: 'Central government agricultural center providing subsidized inputs and comprehensive farming support.',
         services: ['Subsidized Inputs', 'Crop Insurance', 'Government Schemes', 'Storage Facilities', 'Market Linkage'],
         contact_person: 'Mr. Anil Kumar',
-        rating: 4.1,
+        rating: 0,
         is_verified: true,
         schemes: [
           {
@@ -222,7 +222,7 @@ class KrushiLinkDB {
         description: 'Private agricultural store offering premium quality seeds, modern farming tools and expert consultation services.',
         services: ['Premium Seeds', 'Modern Tools', 'Consultation', 'Organic Products', 'Irrigation Systems'],
         contact_person: 'Mr. Santosh Joshi',
-        rating: 4.0,
+        rating: 0,
         is_verified: true,
         schemes: []
       },
@@ -238,7 +238,7 @@ class KrushiLinkDB {
         description: 'Advanced agricultural technology store specializing in modern farming equipment and smart irrigation solutions.',
         services: ['Smart Irrigation', 'Drones', 'Sensors', 'Modern Equipment', 'Technology Training'],
         contact_person: 'Ms. Kavita Desai',
-        rating: 4.3,
+        rating: 0,
         is_verified: true,
         schemes: []
       },
@@ -254,7 +254,7 @@ class KrushiLinkDB {
         description: 'Family-owned store providing quality agricultural inputs and personalized farming advice for three generations.',
         services: ['Traditional Seeds', 'Organic Fertilizers', 'Hand Tools', 'Personal Advice', 'Local Varieties'],
         contact_person: 'Mr. Govind Patil',
-        rating: 3.9,
+        rating: 0,
         is_verified: true,
         schemes: []
       }
@@ -281,13 +281,17 @@ class KrushiLinkDB {
       
       if (error) {
         console.error('Error fetching store:', error);
-        return null;
+        // Return fallback data for this specific store
+        const fallbackStores = this.getFallbackStores();
+        return fallbackStores.find(store => store.id === parseInt(id)) || null;
       }
       
       return store;
     } catch (error) {
       console.error('Error fetching store by ID:', error);
-      return null;
+      // Return fallback data for this specific store
+      const fallbackStores = this.getFallbackStores();
+      return fallbackStores.find(store => store.id === parseInt(id)) || null;
     }
   }
 
@@ -349,12 +353,14 @@ class KrushiLinkDB {
       
       if (error) {
         console.error('Error fetching comments:', error);
+        // Return empty array for now, comments will work once Supabase API is properly set up
         return [];
       }
       
       return comments || [];
     } catch (error) {
       console.error('Error in getComments:', error);
+      // Return empty array for now, comments will work once Supabase API is properly set up
       return [];
     }
   }
