@@ -124,8 +124,13 @@ a:hover {
   #hero h1 {
     font-size: 2rem;
   }
-  #hero p {
+  #hero .lead {
     font-size: 1rem;
+  }
+  
+  #hero .btn {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
   }
   #about h2, #why h2, #services h2, #testimonials h2, #cta h2, #contact-preview h2 {
     font-size: 2rem;
@@ -137,10 +142,21 @@ a:hover {
 
 @media (max-width: 480px) {
   #hero h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
-  #hero p {
-    font-size: 0.9rem;
+  #hero .lead {
+    font-size: 0.95rem;
+  }
+  
+  #hero .btn {
+    padding: 0.4rem 1.2rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  #hero .btn.me-3 {
+    margin-right: 0 !important;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -174,14 +190,37 @@ a:hover {
 }
 
 #hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100vh;
-  background: url('assets/images/home/benjamin-davies-Zm2n2O7Fph4-unsplash\ 1.png') center/cover no-repeat;
-  position: relative;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Ensure hero section doesn't take full height to prevent scrolling */
+.min-vh-75 {
+  min-height: 75vh;
+}
+
+/* Hero responsive adjustments */
+@media (max-width: 991.98px) {
+  #hero {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
   
+  .min-vh-75 {
+    min-height: auto;
+  }
+  
+  #hero .col-lg-6 {
+    text-align: center;
+  }
+  
+  #hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  #hero .lead {
+    font-size: 1.1rem;
+  }
 }
 
 .hero h1 {
