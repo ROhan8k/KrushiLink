@@ -33,9 +33,9 @@
       <!-- Navbar links -->
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="store.html">Store</a></li>
+          <li class="nav-item"><a class="nav-link active" href="store.html">Store</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 
           <!-- Dropdown -->
@@ -70,139 +70,122 @@
     </div>
 
     <!-- Filter Box -->
-    <div class="filter-box shadow-sm p-4 rounded mb-4">
-      <h5 class="fw-bold mb-3">Find Stores</h5>
+    <div class="filter-box shadow-sm p-4 rounded mb-4 bg-light">
+      <h5 class="fw-bold mb-3"><i class="bi bi-funnel me-2"></i>Find Stores</h5>
       <form id="filterForm" class="row g-3 align-items-end">
+        
+        <!-- District Filter -->
         <div class="col-md-3">
-          <label class="form-label">Type</label>
-          <select class="form-select" id="filterType">
-            <option value="All">All</option>
-            <option value="Government">Government</option>
-            <option value="Private">Private</option>
+          <label for="districtFilter" class="form-label">District</label>
+          <select id="districtFilter" class="form-select">
+            <option value="all">All Districts</option>
+            <option value="Pune">Pune</option>
+            <option value="Nashik">Nashik</option>
+            <option value="Aurangabad">Aurangabad</option>
+            <option value="Kolhapur">Kolhapur</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Solapur">Solapur</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Thane">Thane</option>
           </select>
         </div>
 
+        <!-- Store Type Filter -->
         <div class="col-md-3">
-          <label class="form-label">District</label>
-          <select class="form-select" id="filterDistrict">
-            <option value="All">All Districts</option>
-            <option>Pune</option>
-            <option>Nagpur</option>
-            <option>Nashik</option>
-            <option>Kolhapur</option>
-            <option>Aurangabad</option>
-            <option>Solapur</option>
-            <option>Sangli</option>
-            <option>Thane</option>
-            <option>Satara</option>
-            <option>Amravati</option>
-            <option>Ahmednagar</option>
-            <!-- Add all Maharashtra districts -->
+          <label for="typeFilter" class="form-label">Store Type</label>
+          <select id="typeFilter" class="form-select">
+            <option value="all">All Types</option>
+            <option value="government">Government Stores</option>
+            <option value="private">Private Stores</option>
           </select>
         </div>
 
-        <div class="col-md-3">
-          <label class="form-label">City</label>
-          <select class="form-select" id="filterCity">
-            <option value="All">All Cities</option>
-            <option>Pune</option>
-            <option>Nagpur</option>
-            <option>Nashik</option>
-            <option>Kolhapur</option>
-            <option>Aurangabad</option>
-            <option>Solapur</option>
-            <option>Sangli</option>
-            <option>Thane</option>
-            <option>Satara</option>
-            <option>Amravati</option>
-            <option>Ahmednagar</option>
-            <!-- Add more cities from districts -->
-          </select>
+        <!-- Search Filter -->
+        <div class="col-md-4">
+          <label for="searchFilter" class="form-label">Search</label>
+          <input type="text" id="searchFilter" class="form-control" placeholder="Search stores, services...">
         </div>
 
-        <div class="col-md-3">
-          <label class="form-label">Taluka</label>
-          <select class="form-select" id="filterTaluka">
-            <option value="All">All Talukas</option>
-            <option>Haveli</option>
-            <option>Khed</option>
-            <option>Maval</option>
-            <option>Daund</option>
-            <option>Baramati</option>
-            <option>Karveer</option>
-            <option>Miraj</option>
-            <!-- Add talukas properly under each district -->
-          </select>
-        </div>
-
-        <div class="col-12 text-center mt-3">
-          <button type="button" class="btn btn-success px-4 me-2" onclick="applyFilters()">Apply Filters</button>
-          <button type="button" class="btn btn-outline-secondary px-4" onclick="resetFilters()">Clear</button>
+        <!-- Filter Button -->
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-search me-1"></i>Filter
+          </button>
         </div>
       </form>
     </div>
 
-    <!-- Store Results -->
-    <div class="store-results shadow-sm p-4 rounded">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 class="fw-bold mb-0">Available Stores</h5>
-        <span id="storeCount" class="text-muted">Showing 0</span>
-      </div>
+    <!-- Results Summary -->
+    <div id="resultsInfo" class="mb-3">
+      <small class="text-muted">Loading stores...</small>
+    </div>
 
-      <div class="row g-4" id="storeList">
-        <!-- Store Card Example -->
-        <div class="col-md-6 col-lg-3 store-card" data-type="Government" data-district="Pune" data-city="Pune" data-taluka="Haveli">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="https://via.placeholder.com/400x200.png?text=Maharashtra+Agro+Store" class="card-img-top" alt="Maharashtra Agro Store">
-            <div class="card-body">
-              <h6 class="fw-bold">Maharashtra Agro Store</h6>
-              <p class="text-muted small">Government • Pune</p>
-              <p class="small">Trusted govt store with subsidies and schemes.</p>
-              <button class="btn btn-outline-success btn-sm w-100" onclick="viewStore(this)">View Details</button>
-            </div>
-          </div>
-        </div>
+    <!-- Store Cards Container -->
+    <div id="storeContainer" class="row g-4">
+      <!-- Store cards will be dynamically inserted here -->
+    </div>
 
-        <div class="col-md-6 col-lg-3 store-card" data-type="Private" data-district="Nagpur" data-city="Nagpur" data-taluka="Nagpur">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="https://via.placeholder.com/400x200.png?text=Agro+Mart+Pvt+Ltd" class="card-img-top" alt="Agro Mart Pvt Ltd">
-            <div class="card-body">
-              <h6 class="fw-bold">Agro Mart Pvt. Ltd.</h6>
-              <p class="text-muted small">Private • Nagpur</p>
-              <p class="small">Wide variety of seeds, fertilizers, tools.</p>
-              <button class="btn btn-outline-success btn-sm w-100" onclick="viewStore(this)">View Details</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 store-card" data-type="Government" data-district="Nashik" data-city="Nashik" data-taluka="Nashik">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="https://via.placeholder.com/400x200.png?text=Krushi+Govt+Center" class="card-img-top" alt="Krushi Govt Center">
-            <div class="card-body">
-              <h6 class="fw-bold">Krushi Govt Center</h6>
-              <p class="text-muted small">Government • Nashik</p>
-              <p class="small">Govt-backed support & seasonal schemes.</p>
-              <button class="btn btn-outline-success btn-sm w-100" onclick="viewStore(this)">View Details</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 store-card" data-type="Private" data-district="Kolhapur" data-city="Kolhapur" data-taluka="Karveer">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="https://via.placeholder.com/400x200.png?text=GreenGrow+Agro" class="card-img-top" alt="GreenGrow Agro">
-            <div class="card-body">
-              <h6 class="fw-bold">GreenGrow Agro</h6>
-              <p class="text-muted small">Private • Kolhapur</p>
-              <p class="small">Top-quality farming equipment and supplies.</p>
-              <button class="btn btn-outline-success btn-sm w-100" onclick="viewStore(this)">View Details</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- No Results Message -->
+    <div id="noResults" class="text-center py-5" style="display: none;">
+      <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
+      <h4 class="mt-3 text-muted">No stores found</h4>
+      <p class="text-muted">Try adjusting your filters or search terms</p>
     </div>
   </section>
 
-  <footer id="footer" class="footer bg-dark text-white pt-5">
+  <!-- Store Details Modal -->
+  <div class="modal fade" id="storeModal" tabindex="-1" aria-labelledby="storeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="storeModalLabel">Store Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="storeModalBody">
+          <!-- Store details will be inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comment Modal -->
+  <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="commentModalLabel">Add Comment</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="commentForm">
+            <input type="hidden" id="commentStoreId" value="">
+            <div class="mb-3">
+              <label for="commentRating" class="form-label">Rating</label>
+              <select id="commentRating" class="form-select" required>
+                <option value="">Select Rating</option>
+                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                <option value="4">⭐⭐⭐⭐ Good</option>
+                <option value="3">⭐⭐⭐ Average</option>
+                <option value="2">⭐⭐ Poor</option>
+                <option value="1">⭐ Terrible</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="commentText" class="form-label">Your Comment</label>
+              <textarea id="commentText" class="form-control" rows="4" placeholder="Share your experience with this store..." required></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-success" id="submitComment">Submit Comment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4 mt-5">
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6">
@@ -231,173 +214,366 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-  (function () {
-    // ----- Helpers -----
-    const $ = (sel, ctx=document) => ctx.querySelector(sel);
-    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+  <script type="module" src="assets/scripts/database.js"></script>
+  <script type="module">
+    // Store Management System
+    let currentStores = [];
+    let selectedStoreId = null;
 
-    const typeEl = $('#filterType');
-    const districtEl = $('#filterDistrict');
-    const cityEl = $('#filterCity');
-    const categoryEl = $('#filterCategory');
-    const applyBtn = $('#applyFilters');
-    const clearBtn = $('#clearFilters');
-    const resultCountEl = $('#resultCount');
-    const grid = $('#storesGrid');
-    const noResults = $('#noResults');
-
-    const cards = $$('.store-col');
-
-    // Build District -> Cities map from card dataset
-    const index = {};
-    cards.forEach(card => {
-      const d = card.dataset.district;  // lowercase
-      const c = card.dataset.city;
-      if (!index[d]) index[d] = new Set();
-      index[d].add(c);
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', async function() {
+      await loadStores();
+      setupEventListeners();
     });
 
-    // Populate District select
-    const addOption = (select, value, label) => {
-      const opt = document.createElement('option');
-      opt.value = value; opt.textContent = label;
-      select.appendChild(opt);
-    };
-
-    Object.keys(index).sort().forEach(d => {
-      addOption(districtEl, d, capitalize(d));
-    });
-
-    // Update City select when District changes
-    districtEl.addEventListener('change', () => {
-      cityEl.innerHTML = '';
-      addOption(cityEl, 'all', 'All Cities');
-      if (districtEl.value === 'all') {
-        cityEl.disabled = true;
-      } else {
-        cityEl.disabled = false;
-        const cities = Array.from(index[districtEl.value]).sort();
-        cities.forEach(c => addOption(cityEl, c, capitalize(c)));
-      }
-    });
-
-    // Apply filtering
-    function applyFilters() {
-      const type = typeEl.value;           // all | government | private
-      const district = districtEl.value;   // all | district
-      const city = cityEl.value;           // all | city
-      const category = categoryEl.value;   // all | seeds | fertilizers | equipment
-
-      let shown = 0;
-      cards.forEach(card => {
-        const matchType = (type === 'all') || (card.dataset.type === type);
-        const matchDistrict = (district === 'all') || (card.dataset.district === district);
-        const matchCity = (city === 'all') || (card.dataset.city === city);
-        const cats = (card.dataset.category || '').split(',').map(s => s.trim());
-        const matchCategory = (category === 'all') || cats.includes(category);
-
-        const visible = matchType && matchDistrict && matchCity && matchCategory;
-        card.classList.toggle('d-none', !visible);
-        if (visible) shown++;
-      });
-
-      resultCountEl.textContent = `Showing ${shown} ${shown === 1 ? 'store' : 'stores'}`;
-      noResults.classList.toggle('d-none', shown !== 0);
-    }
-
-    // Clear filters
-    function clearFilters() {
-      typeEl.value = 'all';
-      districtEl.value = 'all';
-      cityEl.innerHTML = '';
-      addOption(cityEl, 'all', 'All Cities');
-      cityEl.disabled = true;
-      categoryEl.value = 'all';
-      applyFilters();
-    }
-
-    applyBtn.addEventListener('click', applyFilters);
-    clearBtn.addEventListener('click', clearFilters);
-
-    // Initial state
-    cityEl.disabled = true;
-    applyFilters();
-
-    // ---- Comments scaffold (front-end only) ----
-    // Consider user "logged in" if localStorage.kl_user exists.
-    // Hook your register/login to set: localStorage.setItem('kl_user', JSON.stringify({ email: '...' }))
-    const isLoggedIn = !!localStorage.getItem('kl_user');
-
-    function renderCommentBox() {
-      $$('.comment-box').forEach(box => {
-        const storeId = box.dataset.store;
-        box.innerHTML = isLoggedIn
-          ? `
-            <div class="mb-2">
-              <textarea class="form-control comment-input" rows="2" placeholder="Share your experience..." data-comment-input="${storeId}"></textarea>
-            </div>
-            <div class="d-flex justify-content-end comment-actions">
-              <button class="btn btn-success btn-sm" data-comment-submit="${storeId}">Post</button>
-            </div>
-          `
-          : `<p class="text-muted small mb-0">Login or register to leave a comment.</p>`;
-      });
-    }
-
-    function loadComments(storeId) {
-      const key = `kl_comments_${storeId}`;
+    // Load and display stores
+    async function loadStores() {
       try {
-        const data = JSON.parse(localStorage.getItem(key) || '[]');
-        return Array.isArray(data) ? data : [];
-      } catch { return []; }
+        currentStores = await window.krushiDB.getAllStores();
+        displayStores(currentStores);
+        updateResultsInfo(currentStores.length, currentStores.length);
+      } catch (error) {
+        console.error('Error loading stores:', error);
+        document.getElementById('storeContainer').innerHTML = `
+          <div class="col-12 text-center">
+            <div class="alert alert-danger">
+              <i class="bi bi-exclamation-triangle"></i>
+              Error loading stores. Please refresh the page.
+            </div>
+          </div>
+        `;
+      }
     }
 
-    function saveComments(storeId, comments) {
-      localStorage.setItem(`kl_comments_${storeId}`, JSON.stringify(comments));
+    // Display stores in grid
+    function displayStores(stores) {
+      const container = document.getElementById('storeContainer');
+      const noResults = document.getElementById('noResults');
+
+      if (stores.length === 0) {
+        container.innerHTML = '';
+        noResults.style.display = 'block';
+        return;
+      }
+
+      noResults.style.display = 'none';
+      container.innerHTML = stores.map(store => createStoreCard(store)).join('');
     }
 
-    function renderComments(storeId) {
-      const listEl = $(`[data-store-list="${storeId}"]`);
-      if (!listEl) return;
-      const comments = loadComments(storeId);
-      listEl.innerHTML = comments.map(c => `
-        <li class="border rounded p-2 mb-2">
-          <div class="small text-muted">${new Date(c.time).toLocaleString()}</div>
-          <div>${escapeHtml(c.text)}</div>
-        </li>
-      `).join('');
+    // Create store card HTML
+    function createStoreCard(store) {
+      const typeIcon = store.type === 'government' ? 'bi-building' : 'bi-shop';
+      const typeBadge = store.type === 'government' ? 
+        '<span class="badge bg-primary mb-2"><i class="bi bi-building me-1"></i>Government Store</span>' :
+        '<span class="badge bg-info mb-2"><i class="bi bi-shop me-1"></i>Private Store</span>';
+      
+      const hasSchemes = store.schemes && store.schemes.length > 0;
+      const schemesBadge = hasSchemes ? 
+        `<span class="badge bg-success mb-2"><i class="bi bi-gift me-1"></i>${store.schemes.length} Schemes Available</span>` : '';
+
+      return `
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 shadow-sm store-card" data-store-id="${store.id}">
+            <div class="position-relative">
+              <img src="${store.image_url}" class="card-img-top" alt="${store.name}" style="height: 200px; object-fit: cover;">
+              <div class="position-absolute top-0 end-0 p-2">
+                ${store.is_verified ? '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Verified</span>' : ''}
+              </div>
+            </div>
+            <div class="card-body d-flex flex-column">
+              ${typeBadge}
+              ${schemesBadge}
+              <h5 class="card-title fw-bold">${store.name}</h5>
+              <p class="text-muted mb-2">
+                <i class="bi bi-geo-alt"></i> ${store.district}, Maharashtra
+              </p>
+              <p class="card-text text-muted small">${store.description.substring(0, 100)}...</p>
+              
+              <!-- Services -->
+              <div class="mb-3">
+                <div class="d-flex flex-wrap gap-1">
+                  ${store.services.slice(0, 3).map(service => 
+                    `<span class="badge bg-light text-dark">${service}</span>`
+                  ).join('')}
+                  ${store.services.length > 3 ? `<span class="badge bg-secondary">+${store.services.length - 3} more</span>` : ''}
+                </div>
+              </div>
+
+              <!-- Rating -->
+              <div class="mb-3">
+                <div class="d-flex align-items-center">
+                  <div class="me-2">${window.krushiDB.generateStars(store.rating)}</div>
+                  <small class="text-muted">${store.rating}/5</small>
+                </div>
+              </div>
+
+              <div class="mt-auto">
+                <div class="d-flex gap-2">
+                  <button class="btn btn-outline-success btn-sm flex-fill view-store-btn" data-store-id="${store.id}">
+                    <i class="bi bi-eye me-1"></i>View Details
+                  </button>
+                  <button class="btn btn-success btn-sm add-comment-btn" data-store-id="${store.id}">
+                    <i class="bi bi-chat-dots me-1"></i>Comment
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
-    // Post handler
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-comment-submit]');
-      if (!btn) return;
-      const storeId = btn.getAttribute('data-comment-submit');
-      const input = $(`[data-comment-input="${storeId}"]`);
-      if (!input || !input.value.trim()) return;
+    // Setup event listeners
+    function setupEventListeners() {
+      // Filter form
+      document.getElementById('filterForm').addEventListener('submit', handleFilter);
+      
+      // Real-time search
+      document.getElementById('searchFilter').addEventListener('input', debounce(handleFilter, 300));
+      
+      // Store interaction buttons
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.view-store-btn')) {
+          const storeId = parseInt(e.target.closest('.view-store-btn').dataset.storeId);
+          showStoreDetails(storeId);
+        }
+        
+        if (e.target.closest('.add-comment-btn')) {
+          const storeId = parseInt(e.target.closest('.add-comment-btn').dataset.storeId);
+          showCommentModal(storeId);
+        }
+      });
 
-      const comments = loadComments(storeId);
-      comments.unshift({ text: input.value.trim(), time: Date.now() });
-      saveComments(storeId, comments);
-      input.value = '';
-      renderComments(storeId);
-    });
-
-    // Init comments UI
-    renderCommentBox();
-    ['store1','store2','store3','store4'].forEach(renderComments);
-
-    // Utils
-    function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
-    function escapeHtml(str) {
-      return str.replace(/[&<>"']/g, m => ({
-        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
-      }[m]));
+      // Comment submission
+      document.getElementById('submitComment').addEventListener('click', submitComment);
     }
-  })();
+
+    // Handle filtering
+    async function handleFilter(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      
+      const filters = {
+        district: document.getElementById('districtFilter').value,
+        type: document.getElementById('typeFilter').value,
+        search: document.getElementById('searchFilter').value
+      };
+
+      try {
+        const filteredStores = await window.krushiDB.filterStores(filters);
+        displayStores(filteredStores);
+        updateResultsInfo(filteredStores.length, currentStores.length);
+      } catch (error) {
+        console.error('Error filtering stores:', error);
+      }
+    }
+
+    // Update results info
+    function updateResultsInfo(showing, total) {
+      const info = document.getElementById('resultsInfo');
+      if (showing === total) {
+        info.innerHTML = `<small class="text-muted">Showing <strong>${total}</strong> stores</small>`;
+      } else {
+        info.innerHTML = `<small class="text-muted">Showing <strong>${showing}</strong> of <strong>${total}</strong> stores</small>`;
+      }
+    }
+
+    // Show store details in modal
+    async function showStoreDetails(storeId) {
+      try {
+        const store = await window.krushiDB.getStoreById(storeId);
+        const comments = await window.krushiDB.getComments(storeId);
+        
+        if (!store) return;
+
+        const modalBody = document.getElementById('storeModalBody');
+        modalBody.innerHTML = createStoreDetailsHTML(store, comments);
+        
+        new bootstrap.Modal(document.getElementById('storeModal')).show();
+        selectedStoreId = storeId;
+        
+        // Setup comment delete buttons
+        setupCommentDeleteButtons();
+      } catch (error) {
+        console.error('Error loading store details:', error);
+      }
+    }
+
+    // Create store details HTML
+    function createStoreDetailsHTML(store, comments) {
+      const hasSchemes = store.schemes && store.schemes.length > 0;
+      
+      return `
+        <div class="row">
+          <div class="col-md-6">
+            <img src="${store.image_url}" class="img-fluid rounded mb-3" alt="${store.name}">
+            <h3>${store.name}</h3>
+            <div class="mb-3">
+              ${store.type === 'government' ? 
+                '<span class="badge bg-primary me-2"><i class="bi bi-building me-1"></i>Government Store</span>' :
+                '<span class="badge bg-info me-2"><i class="bi bi-shop me-1"></i>Private Store</span>'
+              }
+              ${store.is_verified ? '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Verified</span>' : ''}
+            </div>
+            <p class="text-muted">${store.description}</p>
+            
+            <div class="mb-3">
+              <h6>Contact Information</h6>
+              <p class="mb-1"><i class="bi bi-geo-alt text-primary"></i> ${store.address}</p>
+              <p class="mb-1"><i class="bi bi-telephone text-primary"></i> ${store.phone}</p>
+              <p class="mb-1"><i class="bi bi-envelope text-primary"></i> ${store.email}</p>
+              <p class="mb-1"><i class="bi bi-person text-primary"></i> ${store.contact_person}</p>
+            </div>
+
+            <div class="mb-3">
+              <h6>Services Offered</h6>
+              <div class="d-flex flex-wrap gap-1">
+                ${store.services.map(service => `<span class="badge bg-light text-dark">${service}</span>`).join('')}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <h6>Rating</h6>
+              <div class="d-flex align-items-center">
+                <div class="me-2">${window.krushiDB.generateStars(store.rating)}</div>
+                <span class="fw-bold">${store.rating}/5</span>
+                <small class="text-muted ms-2">(${comments.length} reviews)</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            ${hasSchemes ? `
+              <div class="mb-4">
+                <h6 class="text-success"><i class="bi bi-gift me-2"></i>Government Schemes Available</h6>
+                ${store.schemes.map(scheme => `
+                  <div class="card mb-2">
+                    <div class="card-body p-3">
+                      <h6 class="card-title text-success">${scheme.name}</h6>
+                      <p class="card-text small">${scheme.description}</p>
+                      ${scheme.subsidy_percentage > 0 ? 
+                        `<span class="badge bg-success">Subsidy: ${scheme.subsidy_percentage}%</span>` : 
+                        `<span class="badge bg-info">Free Service</span>`
+                      }
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+            
+            <h6><i class="bi bi-chat-dots me-2"></i>Customer Reviews (${comments.length})</h6>
+            <div class="comments-section" style="max-height: 400px; overflow-y: auto;">
+              ${comments.length > 0 ? 
+                comments.map(comment => createCommentHTML(comment)).join('') :
+                '<p class="text-muted">No reviews yet. Be the first to review this store!</p>'
+              }
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Create comment HTML
+    function createCommentHTML(comment) {
+      const canDelete = window.krushiDB.currentUser && 
+                       window.krushiDB.currentUser.email === comment.user_email;
+      
+      return `
+        <div class="card mb-3">
+          <div class="card-body p-3">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h6 class="mb-1">${comment.user_name}</h6>
+                <div class="mb-2">${window.krushiDB.generateStars(comment.rating)}</div>
+              </div>
+              <div class="text-end">
+                <small class="text-muted">${window.krushiDB.formatDate(comment.created_at)}</small>
+                ${canDelete ? `
+                  <button class="btn btn-outline-danger btn-sm ms-2 delete-comment-btn" 
+                          data-comment-id="${comment.id}" data-store-id="${selectedStoreId}">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+            <p class="mb-0">${comment.comment}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Show comment modal
+    function showCommentModal(storeId) {
+      if (!window.krushiDB.currentUser) {
+        window.krushiDB.showMessage('Please login to add a comment', 'warning');
+        return;
+      }
+
+      document.getElementById('commentStoreId').value = storeId;
+      document.getElementById('commentForm').reset();
+      new bootstrap.Modal(document.getElementById('commentModal')).show();
+    }
+
+    // Submit comment
+    async function submitComment() {
+      const storeId = parseInt(document.getElementById('commentStoreId').value);
+      const rating = document.getElementById('commentRating').value;
+      const comment = document.getElementById('commentText').value.trim();
+
+      if (!rating || !comment) {
+        window.krushiDB.showMessage('Please fill in all fields', 'warning');
+        return;
+      }
+
+      try {
+        await window.krushiDB.addComment(storeId, comment, rating);
+        window.krushiDB.showMessage('Comment added successfully!', 'success');
+        
+        // Close modal and refresh store details if open
+        bootstrap.Modal.getInstance(document.getElementById('commentModal')).hide();
+        
+        if (selectedStoreId === storeId) {
+          showStoreDetails(storeId);
+        }
+      } catch (error) {
+        console.error('Error adding comment:', error);
+        window.krushiDB.showMessage(error.message || 'Error adding comment', 'error');
+      }
+    }
+
+    // Setup comment delete buttons
+    function setupCommentDeleteButtons() {
+      document.querySelectorAll('.delete-comment-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+          const commentId = parseInt(this.dataset.commentId);
+          const storeId = parseInt(this.dataset.storeId);
+          
+          if (confirm('Are you sure you want to delete this comment?')) {
+            try {
+              await window.krushiDB.deleteComment(storeId, commentId);
+              window.krushiDB.showMessage('Comment deleted successfully!', 'success');
+              showStoreDetails(storeId); // Refresh the modal
+            } catch (error) {
+              console.error('Error deleting comment:', error);
+              window.krushiDB.showMessage(error.message || 'Error deleting comment', 'error');
+            }
+          }
+        });
+      });
+    }
+
+    // Debounce function for search
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
   </script>
   <script type="module" src="assets/scripts/auth.js"></script>
 </body>
-
 </html>
