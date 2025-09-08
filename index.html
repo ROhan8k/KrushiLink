@@ -41,29 +41,29 @@
         <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="store.html">Store</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item"><a class="nav-link active" href="index.html" data-i18n="nav.home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html" data-i18n="nav.about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="store.html" data-i18n="nav.store">Store</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html" data-i18n="nav.contact">Contact</a></li>
 
             <!-- Dropdown -->
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false" data-i18n="nav.language">
                 Language
               </a>
               <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                <li><a class="dropdown-item" href="#">English</a></li>
-                <li><a class="dropdown-item" href="#">Hindi</a></li>
-                <li><a class="dropdown-item" href="#">Marathi</a></li>
+                <li><a class="dropdown-item language-link" href="#" data-lang="en">English</a></li>
+                <li><a class="dropdown-item language-link" href="#" data-lang="hi">हिन्दी</a></li>
+                <li><a class="dropdown-item language-link" href="#" data-lang="mr">मराठी</a></li>
               </ul>
             </li>
           </ul>
 
           <!-- Login/Register buttons -->
           <div id="authSection" class="d-flex ms-lg-3 gap-2">
-            <a class="btn btn-outline-success" href="login.html">Login</a>
-            <a class="btn btn-success text-white" href="register.html">Register</a>
+            <a class="btn btn-outline-success" href="login.html" data-i18n="nav.login">Login</a>
+            <a class="btn btn-success text-white" href="register.html" data-i18n="nav.register">Register</a>
           </div>
         </div>
       </div>
@@ -77,10 +77,10 @@
       <div class="row align-items-center min-vh-75">
         <!-- Content on left -->
         <div class="col-lg-7 order-2 order-lg-1 my-4 my-md-5 my-lg-0 text-center">
-          <h1 class="display-4 fw-bold text-dark">Connecting Farmers to Resources</h1>
-          <p class="lead mt-3 text-muted">Trusted agro-stores, government schemes, and tools at your fingertips.</p>
+          <h1 class="display-4 fw-bold text-dark" data-i18n="homepage.hero_title">Connecting Farmers to Resources</h1>
+          <p class="lead mt-3 text-muted" data-i18n="homepage.hero_subtitle">Trusted agro-stores, government schemes, and tools at your fingertips.</p>
           <div class="mt-4">
-            <a href="store.html" class="btn btn-success btn-lg px-5">Browse Stores</a>
+            <a href="store.html" class="btn btn-success btn-lg px-5" data-i18n="homepage.browse_stores">Browse Stores</a>
           </div>
         </div>
         <!-- Image on right -->
@@ -111,9 +111,9 @@
             loading="lazy">
         </div>
         <div class="col-lg-6 my-4 my-md-5 my-lg-6">
-          <h2 class="fw-bold fs-2 fs-md-4 fs-lg-4">About KrushiLink</h2>
-          <p class="mt-3 text-muted">KrushiLink helps farmers across Maharashtra access trusted agro-stores, government schemes, and essential agricultural resources. Our platform empowers farmers to make informed decisions and improve productivity.</p>
-          <a href="about.html" class="btn btn-success mt-3">Read More</a>
+          <h2 class="fw-bold fs-2 fs-md-4 fs-lg-4" data-i18n="homepage.about_title">About KrushiLink</h2>
+          <p class="mt-3 text-muted" data-i18n="homepage.about_text">KrushiLink helps farmers across Maharashtra access trusted agro-stores, government schemes, and essential agricultural resources. Our platform empowers farmers to make informed decisions and improve productivity.</p>
+          <a href="about.html" class="btn btn-success mt-3" data-i18n="homepage.read_more">Read More</a>
         </div>
       </div>
     </div>
@@ -122,27 +122,27 @@
   <!-- ================= WHY KRUSHILINK ================= -->
   <section id="why" class="py-5 bg-light">
     <div class="container text-center my-4 my-md-5 my-lg-6">
-      <h2 class="fw-bold fs-2 fs-md-4 fs-lg-4">Why Choose KrushiLink?</h2>
+      <h2 class="fw-bold fs-2 fs-md-4 fs-lg-4" data-i18n="homepage.why_title">Why Choose KrushiLink?</h2>
       <div class="row g-4">
         <div class="col-md-4">
           <div class="p-4 bg-white rounded shadow-sm h-100">
             <i class="bi bi-check-circle text-success fs-1 mb-3"></i>
-            <h5 class="fw-bold">Trusted Stores</h5>
-            <p>Verified agro-stores providing quality products for all types of farming needs.</p>
+            <h5 class="fw-bold" data-i18n="homepage.trusted_stores">Trusted Stores</h5>
+            <p data-i18n="homepage.trusted_stores_desc">Verified agro-stores providing quality products for all types of farming needs.</p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="p-4 bg-white rounded shadow-sm h-100">
             <i class="bi bi-card-checklist text-success fs-1 mb-3"></i>
-            <h5 class="fw-bold">Government Schemes</h5>
-            <p>Access the latest government agricultural schemes and subsidies easily.</p>
+            <h5 class="fw-bold" data-i18n="homepage.gov_schemes">Government Schemes</h5>
+            <p data-i18n="homepage.gov_schemes_desc">Access the latest government agricultural schemes and subsidies easily.</p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="p-4 bg-white rounded shadow-sm h-100">
             <i class="bi bi-people text-success fs-1 mb-3"></i>
-            <h5 class="fw-bold">Farmer Support</h5>
-            <p>Dedicated support and resources to help farmers increase productivity and profits.</p>
+            <h5 class="fw-bold" data-i18n="homepage.farmer_support">Farmer Support</h5>
+            <p data-i18n="homepage.farmer_support_desc">Dedicated support and resources to help farmers increase productivity and profits.</p>
           </div>
         </div>
       </div>
@@ -152,21 +152,21 @@
   <!-- ================= SERVICES / STORE HIGHLIGHTS ================= -->
   <section id="services" class="py-5 my-4 my-md-5 my-lg-6">
     <div class="container text-center fs-2 fs-md-4 fs-lg-4">
-      <h2 class="fw-bold mb-4">Our Services</h2>
-      <p class="text-muted mb-5">Connecting farmers with everything they need to succeed.</p>
+      <h2 class="fw-bold mb-4" data-i18n="homepage.services_title">Our Services</h2>
+      <p class="text-muted mb-5" data-i18n="homepage.services_subtitle">Connecting farmers with everything they need to succeed.</p>
       <div class="row g-4">
         <div class="col-md-3">
           <div class="p-4 bg-white rounded shadow-sm h-100">
             <i class="bi bi-shop text-success fs-1 mb-3"></i>
-            <h5 class="fw-bold">Agro Stores</h5>
-            <p>Find nearby verified stores for seeds, tools, and equipment.</p>
+            <h5 class="fw-bold" data-i18n="homepage.agro_stores">Agro Stores</h5>
+            <p data-i18n="homepage.agro_stores_desc">Find nearby verified stores for seeds, tools, and equipment.</p>
           </div>
         </div>
         <div class="col-md-3">
           <div class="p-4 bg-white rounded shadow-sm h-100">
             <i class="bi bi-flower2 text-success fs-1 mb-3"></i>
-            <h5 class="fw-bold">Seeds & Fertilizers</h5>
-            <p>Access high-quality seeds and fertilizers suited for your crops.</p>
+            <h5 class="fw-bold" data-i18n="homepage.seeds_fertilizers">Seeds & Fertilizers</h5>
+            <p data-i18n="homepage.seeds_fertilizers_desc">Access high-quality seeds and fertilizers suited for your crops.</p>
           </div>
         </div>
         <div class="col-md-3">
@@ -257,24 +257,24 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6">
           <a href="index.html#hero" class="text-decoration-none"><h5 class="fw-bold text-white">KrushiLink</h5></a>
-          <p>Connecting farmers with resources, trusted stores, and government schemes across Maharashtra.</p>
+          <p data-i18n="footer.description">Connecting farmers with resources, trusted stores, and government schemes across Maharashtra.</p>
           <p class="mb-1"><i class="bi bi-telephone"></i> +91 1234567890</p>
           <p><i class="bi bi-envelope"></i> info@krushilink.com</p>
         </div>
 
         <div class="col-lg-2 col-md-6">
-          <h6 class="fw-bold">Quick Links</h6>
+          <h6 class="fw-bold" data-i18n="footer.quick_links">Quick Links</h6>
           <ul class="list-unstyled">
-            <li><a href="index.html" class="text-white-50">Home</a></li>
-            <li><a href="about.html" class="text-white-50">About</a></li>
-            <li><a href="store.html" class="text-white-50">Store</a></li>
-            <li><a href="contact.html" class="text-white-50">Contact</a></li>
+            <li><a href="index.html" class="text-white-50" data-i18n="nav.home">Home</a></li>
+            <li><a href="about.html" class="text-white-50" data-i18n="nav.about">About</a></li>
+            <li><a href="store.html" class="text-white-50" data-i18n="nav.store">Store</a></li>
+            <li><a href="contact.html" class="text-white-50" data-i18n="nav.contact">Contact</a></li>
           </ul>
         </div>
       </div>
 
       <div class="text-center border-top border-secondary pt-3 mt-4">
-        <p class="mb-0">&copy; 2025 <strong>KrushiLink</strong>. All Rights Reserved.</p>
+        <p class="mb-0">&copy; 2025 <strong>KrushiLink</strong>. <span data-i18n="footer.rights_reserved">All Rights Reserved</span>.</p>
       </div>
     </div>
   </footer>
@@ -282,7 +282,21 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="assets/scripts/translations.js"></script>
   <script type="module" src="assets/scripts/database.js"></script>
   <script type="module" src="assets/scripts/auth.js"></script>
+  <script type="module">
+    // Language switching functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle language dropdown clicks
+      document.querySelectorAll('.language-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const lang = this.getAttribute('data-lang');
+          window.languageManager.setLanguage(lang);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
