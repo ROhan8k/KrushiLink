@@ -16,6 +16,10 @@
 
   <!-- Custom CSS -->
   <link href="main.css" rel="stylesheet">
+  
+  <!-- Preload critical images -->
+  <link rel="preload" as="image" href="assets/images/home/benjamin-davies-Zm2n2O7Fph4-unsplash 1.png">
+  <link rel="preload" as="image" href="assets/images/home/gregory-hayes-QFmNQXLPbZc-unsplash 1.png">
 </head>
 
 <body>
@@ -81,7 +85,14 @@
         </div>
         <!-- Image on right -->
         <div class="col-lg-5 order-1 order-lg-2 mb-4 mb-lg-0">
-          <img src="assets/images/home/benjamin-davies-Zm2n2O7Fph4-unsplash 1.png" class="img-fluid rounded shadow" alt="Farmers using KrushiLink" style="max-height: 400px; object-fit: cover;">
+          <img 
+            src="assets/images/home/benjamin-davies-Zm2n2O7Fph4-unsplash 1.png" 
+            srcset="assets/images/home/benjamin-davies-Zm2n2O7Fph4-unsplash 1.png 800w" 
+            sizes="(max-width: 768px) 100vw, 50vw"
+            class="img-fluid rounded shadow" 
+            alt="Farmers using KrushiLink" 
+            style="max-height: 400px; object-fit: cover;"
+            loading="eager">
         </div>
       </div>
     </div>
@@ -92,7 +103,13 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-6">
-          <img src="assets/images/home/gregory-hayes-QFmNQXLPbZc-unsplash 1.png" class="img-fluid rounded shadow" alt="About KrushiLink">
+          <img 
+            src="assets/images/home/gregory-hayes-QFmNQXLPbZc-unsplash 1.png" 
+            srcset="assets/images/home/gregory-hayes-QFmNQXLPbZc-unsplash 1.png 800w" 
+            sizes="(max-width: 768px) 100vw, 50vw"
+            class="img-fluid rounded shadow" 
+            alt="About KrushiLink"
+            loading="lazy">
         </div>
         <div class="col-lg-6 my-4 my-md-5 my-lg-6">
           <h2 class="fw-bold fs-2 fs-md-4 fs-lg-4">About KrushiLink</h2>
@@ -184,7 +201,7 @@
           <div class="card border-0 shadow-sm h-100 p-4">
             <p class="text-muted">"I found nearby agro-stores easily, and the farmer reviews helped me make the right purchase. Highly recommended!"</p>
             <div class="d-flex align-items-center mt-3">
-              <img src="assets/images/home/who-s-denilo-xj7HV0FvSg0-unsplash.jpg" class="rounded-circle me-3" width="50" height="50" alt="Farmer">
+              <img src="assets/images/home/who-s-denilo-xj7HV0FvSg0-unsplash.jpg" class="rounded-circle me-3" width="50" height="50" alt="Farmer" loading="lazy">
               <div>
                 <h6 class="mb-0 fw-bold">Ramesh Patil</h6>
                 <small class="text-muted">Farmer, Nashik</small>
@@ -197,7 +214,7 @@
         <div class="card border-0 shadow-sm h-100 p-4">
           <p class="text-muted">"Government schemes were confusing before, but KrushiLink made it simple. I got the right subsidy within weeks."</p>
           <div class="d-flex align-items-center mt-3">
-            <img src="assets/images/home/equalstock-5mFozuUv3A0-unsplash.jpg" class="rounded-circle me-3" width="50" height="50" alt="Farmer">
+            <img src="assets/images/home/equalstock-5mFozuUv3A0-unsplash.jpg" class="rounded-circle me-3" width="50" height="50" alt="Farmer" loading="lazy">
             <div>
               <h6 class="mb-0 fw-bold">Sunita Jha</h6>
               <small class="text-muted">Farmer, Pune</small>
@@ -210,7 +227,7 @@
         <div class="card border-0 shadow-sm h-100 p-4">
           <p class="text-muted">"I found genuine equipment dealers through Krushil. It saved me time and money. Very useful for farmers like me."</p>
           <div class="d-flex align-items-center mt-3">
-            <img src="assets/images/home/jed-owen-1JgUGDdcWnM-unsplash.jpg" class="rounded-circle me-3" width="50" height="50" alt="Farmer">
+            <img src="assets/images/home/jed-owen-1JgUGDdcWnM-unsplash.jpg" class="rounded-circle me-3" width="50" height="50" alt="Farmer" loading="lazy">
             <div>
               <h6 class="mb-0 fw-bold">Vijay Jadhav</h6>
               <small class="text-muted">Farmer, Sangli</small>
@@ -223,7 +240,7 @@
         <div class="card border-0 shadow-sm h-100 p-4">
           <p class="text-muted">"The store search is amazing! I found private suppliers for seeds and fertilizers within minutes."</p>
           <div class="d-flex align-items-center mt-3">
-            <img src="assets/images/home/darshan-gavali-Dx34reiXFyc-unsplash.png" class="rounded-circle me-3" width="50" height="50" alt="Farmer">
+            <img src="assets/images/home/darshan-gavali-Dx34reiXFyc-unsplash.png" class="rounded-circle me-3" width="50" height="50" alt="Farmer" loading="lazy">
             <div>
               <h6 class="mb-0 fw-bold">Mahesh Shinde</h6>
               <small class="text-muted">Farmer, Kolhapur</small>
