@@ -129,8 +129,8 @@ a:hover {
   }
   
   #hero .btn {
-    padding: 0.5rem 1.5rem;
-    font-size: 0.9rem;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
   }
   #about h2, #why h2, #services h2, #testimonials h2, #cta h2, #contact-preview h2 {
     font-size: 2rem;
@@ -149,14 +149,9 @@ a:hover {
   }
   
   #hero .btn {
-    padding: 0.4rem 1.2rem;
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  #hero .btn.me-3 {
-    margin-right: 0 !important;
-    margin-bottom: 0.5rem;
+    padding: 0.6rem 1.8rem;
+    font-size: 0.9rem;
+    margin-top: 1rem;
   }
 }
 
@@ -210,7 +205,8 @@ a:hover {
     min-height: auto;
   }
   
-  #hero .col-lg-6 {
+  #hero .col-lg-7,
+  #hero .col-lg-5 {
     text-align: center;
   }
   
@@ -220,6 +216,10 @@ a:hover {
   
   #hero .lead {
     font-size: 1.1rem;
+  }
+  
+  #hero .btn {
+    margin-top: 1rem;
   }
 }
 
