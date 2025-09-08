@@ -355,8 +355,8 @@ function setupRealTimeValidation() {
     });
   }
   
-  // Email validation
-  const emails = ["email", "loginEmail"];
+  // Email validation (only for auth pages, not contact page)
+  const emails = ["loginEmail"];  // Removed "email" to avoid conflict with contact page
   emails.forEach(emailId => {
     const emailField = document.getElementById(emailId);
     if (emailField) {
@@ -373,6 +373,22 @@ function setupRealTimeValidation() {
       });
     }
   });
+  
+  // Special handling for register page email field
+  const registerEmailField = document.getElementById("email");
+  if (registerEmailField && document.getElementById("registerForm")) {
+    registerEmailField.addEventListener("blur", () => {
+      const value = registerEmailField.value.trim();
+      
+      if (!value) {
+        showFieldError("email", "Email is required");
+      } else if (!isValidEmail(value)) {
+        showFieldError("email", "Please enter a valid email address");
+      } else {
+        showFieldSuccess("email");
+      }
+    });
+  }
 }
 
 /* ========= Init ========= */
