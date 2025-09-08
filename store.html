@@ -33,28 +33,28 @@
       <!-- Navbar links -->
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link active" href="store.html">Store</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav.home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html" data-i18n="nav.about">About</a></li>
+          <li class="nav-item"><a class="nav-link active" href="store.html" data-i18n="nav.store">Store</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html" data-i18n="nav.contact">Contact</a></li>
 
           <!-- Dropdown -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-i18n="nav.language">
               Language
             </a>
             <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-              <li><a class="dropdown-item" href="#">English</a></li>
-              <li><a class="dropdown-item" href="#">Hindi</a></li>
-              <li><a class="dropdown-item" href="#">Marathi</a></li>
+              <li><a class="dropdown-item language-link" href="#" data-lang="en">English</a></li>
+              <li><a class="dropdown-item language-link" href="#" data-lang="hi">हिन्दी</a></li>
+              <li><a class="dropdown-item language-link" href="#" data-lang="mr">मराठी</a></li>
             </ul>
           </li>
         </ul>
 
         <!-- Login/Register buttons -->
         <div id="authSection" class="d-flex ms-lg-3 gap-2">
-          <a class="btn btn-outline-success" href="login.html">Login</a>
-          <a class="btn btn-success text-white" href="register.html">Register</a>
+          <a class="btn btn-outline-success" href="login.html" data-i18n="nav.login">Login</a>
+          <a class="btn btn-success text-white" href="register.html" data-i18n="nav.register">Register</a>
         </div>
       </div>
     </nav>
@@ -65,8 +65,8 @@
   <section class="store-section container py-5">
     <!-- Heading -->
     <div class="text-center mb-4">
-      <h2 class="fw-bold">Stores in Maharashtra</h2>
-      <p class="text-muted">Find government and private agro-stores across Maharashtra</p>
+      <h2 class="fw-bold" data-i18n="store.title">Agricultural Stores Directory</h2>
+      <p class="text-muted" data-i18n="store.subtitle">Find trusted agro-stores and government schemes near you</p>
     </div>
 
     <!-- Filter Box -->
@@ -76,9 +76,9 @@
         
         <!-- District Filter -->
         <div class="col-md-3">
-          <label for="districtFilter" class="form-label">District</label>
+          <label for="districtFilter" class="form-label" data-i18n="store.filter_district">Filter by District</label>
           <select id="districtFilter" class="form-select">
-            <option value="all">All Districts</option>
+            <option value="all" data-i18n="store.all_districts">All Districts</option>
             <option value="Pune">Pune</option>
             <option value="Nashik">Nashik</option>
             <option value="Aurangabad">Aurangabad</option>
@@ -92,19 +92,19 @@
 
         <!-- Store Type Filter -->
         <div class="col-md-3">
-          <label for="typeFilter" class="form-label">Store Type</label>
+          <label for="typeFilter" class="form-label" data-i18n="store.filter_type">Store Type</label>
           <select id="typeFilter" class="form-select">
-            <option value="all">All Types</option>
-            <option value="government">Government Stores</option>
-            <option value="private">Private Stores</option>
+            <option value="all" data-i18n="store.all_types">All Types</option>
+            <option value="government" data-i18n="store.government">Government</option>
+            <option value="private" data-i18n="store.private">Private</option>
           </select>
         </div>
 
         <!-- Resource Type Filter -->
         <div class="col-md-3">
-          <label for="resourceFilter" class="form-label">Resource Type</label>
+          <label for="resourceFilter" class="form-label" data-i18n="store.filter_resource">Resources</label>
           <select id="resourceFilter" class="form-select">
-            <option value="all">All Resources</option>
+            <option value="all" data-i18n="store.all_resources">All Resources</option>
             <option value="Seeds">Seeds</option>
             <option value="Fertilizers">Fertilizers</option>
             <option value="Pesticides">Pesticides</option>
@@ -119,10 +119,10 @@
         <div class="col-md-3">
           <div class="d-flex gap-2">
             <button type="submit" class="btn btn-success flex-fill">
-              <i class="bi bi-funnel me-1"></i>Filter
+              <i class="bi bi-funnel me-1"></i><span data-i18n="common.filter">Filter</span>
             </button>
             <button type="button" id="clearFilters" class="btn btn-outline-secondary">
-              <i class="bi bi-x-circle me-1"></i>Clear
+              <i class="bi bi-x-circle me-1"></i><span data-i18n="store.clear_filters">Clear All Filters</span>
             </button>
           </div>
         </div>
@@ -142,8 +142,8 @@
     <!-- No Results Message -->
     <div id="noResults" class="text-center py-5" style="display: none;">
       <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
-      <h4 class="mt-3 text-muted">No stores found</h4>
-      <p class="text-muted">Try adjusting your filters or search terms</p>
+      <h4 class="mt-3 text-muted" data-i18n="store.no_results">No stores found</h4>
+      <p class="text-muted" data-i18n="store.no_results_desc">Try adjusting your filters or search terms</p>
     </div>
   </section>
 
@@ -152,7 +152,7 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="storeModalLabel">Store Details</h5>
+          <h5 class="modal-title" id="storeModalLabel" data-i18n="store.view_details">View Details</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="storeModalBody">
@@ -167,32 +167,32 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="commentModalLabel">Add Comment</h5>
+          <h5 class="modal-title" id="commentModalLabel" data-i18n="comments.add_comment">Add Your Review</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form id="commentForm">
             <input type="hidden" id="commentStoreId" value="">
             <div class="mb-3">
-              <label for="commentRating" class="form-label">Rating</label>
+              <label for="commentRating" class="form-label" data-i18n="comments.select_rating">Rating</label>
               <select id="commentRating" class="form-select" required>
-                <option value="">Select Rating</option>
-                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-                <option value="4">⭐⭐⭐⭐ Good</option>
-                <option value="3">⭐⭐⭐ Average</option>
-                <option value="2">⭐⭐ Poor</option>
-                <option value="1">⭐ Terrible</option>
+                <option value="" data-i18n="comments.select_rating">Select Rating</option>
+                <option value="5">⭐⭐⭐⭐⭐ <span data-i18n="comments.excellent">Excellent</span></option>
+                <option value="4">⭐⭐⭐⭐ <span data-i18n="comments.good">Good</span></option>
+                <option value="3">⭐⭐⭐ <span data-i18n="comments.average">Average</span></option>
+                <option value="2">⭐⭐ <span data-i18n="comments.poor">Poor</span></option>
+                <option value="1">⭐ <span data-i18n="comments.terrible">Terrible</span></option>
               </select>
             </div>
             <div class="mb-3">
-              <label for="commentText" class="form-label">Your Comment</label>
-              <textarea id="commentText" class="form-control" rows="4" placeholder="Share your experience with this store..." required></textarea>
+              <label for="commentText" class="form-label" data-i18n="comments.your_comment">Your Comment</label>
+              <textarea id="commentText" class="form-control" rows="4" data-i18n="comments.comment_placeholder" placeholder="Share your experience with this store..." required></textarea>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-success" id="submitComment">Submit Comment</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="comments.cancel">Cancel</button>
+          <button type="button" class="btn btn-success" id="submitComment" data-i18n="comments.submit_comment">Submit Comment</button>
         </div>
       </div>
     </div>
@@ -278,12 +278,12 @@
     function createStoreCard(store) {
       const typeIcon = store.type === 'government' ? 'bi-building' : 'bi-shop';
       const typeBadge = store.type === 'government' ? 
-        '<span class="badge bg-primary mb-2">Government Store</span>' :
-        '<span class="badge bg-info mb-2">Private Store</span>';
+        `<span class="badge bg-primary mb-2">${window.languageManager.translate('store.govt_store')}</span>` :
+        `<span class="badge bg-info mb-2">${window.languageManager.translate('store.private_store')}</span>`;
       
       const hasSchemes = store.schemes && store.schemes.length > 0;
       const schemesBadge = hasSchemes ? 
-        `<span class="badge bg-success mb-2">${store.schemes.length} Schemes Available</span>` : '';
+        `<span class="badge bg-success mb-2">${store.schemes.length} ${window.languageManager.translate('store.schemes_available')}</span>` : '';
 
       return `
         <div class="col-lg-4 col-md-6">
@@ -291,7 +291,7 @@
             <div class="position-relative">
               <img src="${store.image_url}" class="card-img-top" alt="${store.name}" style="height: 200px; object-fit: cover;">
               <div class="position-absolute top-0 end-0 p-2">
-                ${store.is_verified ? '<span class="badge bg-success">Verified</span>' : ''}
+                ${store.is_verified ? `<span class="badge bg-success">${window.languageManager.translate('store.verified')}</span>` : ''}
               </div>
             </div>
             <div class="card-body d-flex flex-column">
@@ -305,8 +305,8 @@
               
               <!-- Services -->
               <div class="mb-3">
-                <small class="text-muted d-block">Available here:</small>
-                <p class="small mb-0">${store.services.slice(0, 3).join(', ')}${store.services.length > 3 ? ` and ${store.services.length - 3} more` : ''}</p>
+                <small class="text-muted d-block">${window.languageManager.translate('store.available_here')}:</small>
+                <p class="small mb-0">${store.services.slice(0, 3).join(', ')}${store.services.length > 3 ? ` ${window.languageManager.translate('store.and_more', {count: store.services.length - 3})}` : ''}</p>
               </div>
 
               <!-- Rating -->
@@ -319,17 +319,17 @@
                 </div>
               ` : `
                 <div class="mb-3">
-                  <small class="text-muted">No ratings yet</small>
+                  <small class="text-muted">${window.languageManager.translate('store.no_ratings')}</small>
                 </div>
               `}
 
               <div class="mt-auto">
                 <div class="d-flex gap-2">
                   <button class="btn btn-outline-success btn-sm flex-fill view-store-btn" data-store-id="${store.id}">
-                    View Details
+                    ${window.languageManager.translate('store.view_details')}
                   </button>
                   <button class="btn btn-success btn-sm add-comment-btn" data-store-id="${store.id}">
-                    Comment
+                    ${window.languageManager.translate('store.add_review')}
                   </button>
                 </div>
               </div>
@@ -601,6 +601,38 @@
       };
     }
   </script>
+  <script type="module" src="assets/scripts/translations.js"></script>
   <script type="module" src="assets/scripts/auth.js"></script>
+  <script type="module">
+    // Language switching functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle language dropdown clicks
+      document.querySelectorAll('.language-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const lang = this.getAttribute('data-lang');
+          window.languageManager.setLanguage(lang);
+        });
+      });
+      
+      // Listen for language changes to update dynamic content
+      window.addEventListener('languageChanged', function(e) {
+        updateDynamicContent();
+      });
+    });
+
+    // Update dynamic content when language changes
+    function updateDynamicContent() {
+      // Update results info if stores are loaded
+      if (currentStores && currentStores.length > 0) {
+        updateResultsInfo(currentStores.length, currentStores.length);
+      }
+      
+      // Re-render store cards with new language
+      if (currentStores) {
+        displayStores(currentStores);
+      }
+    }
+  </script></script>
 </body>
 </html>
