@@ -100,17 +100,31 @@
           </select>
         </div>
 
-        <!-- Search Filter -->
-        <div class="col-md-4">
-          <label for="searchFilter" class="form-label">Search</label>
-          <input type="text" id="searchFilter" class="form-control" placeholder="Search stores, services...">
+        <!-- Resource Type Filter -->
+        <div class="col-md-3">
+          <label for="resourceFilter" class="form-label">Resource Type</label>
+          <select id="resourceFilter" class="form-select">
+            <option value="all">All Resources</option>
+            <option value="Seeds">Seeds</option>
+            <option value="Fertilizers">Fertilizers</option>
+            <option value="Pesticides">Pesticides</option>
+            <option value="Farm Equipment">Farm Equipment</option>
+            <option value="Irrigation Systems">Irrigation Systems</option>
+            <option value="Organic Products">Organic Products</option>
+            <option value="Government Schemes">Government Schemes</option>
+          </select>
         </div>
 
-        <!-- Filter Button -->
-        <div class="col-md-2">
-          <button type="submit" class="btn btn-success w-100">
-            <i class="bi bi-search me-1"></i>Filter
-          </button>
+        <!-- Filter and Clear Buttons -->
+        <div class="col-md-3">
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success flex-fill">
+              <i class="bi bi-funnel me-1"></i>Filter
+            </button>
+            <button type="button" id="clearFilters" class="btn btn-outline-secondary">
+              <i class="bi bi-x-circle me-1"></i>Clear
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -328,8 +342,11 @@
       // Filter form
       document.getElementById('filterForm').addEventListener('submit', handleFilter);
       
-      // Real-time search
-      document.getElementById('searchFilter').addEventListener('input', debounce(handleFilter, 300));
+      // Clear filters button
+      document.getElementById('clearFilters').addEventListener('click', clearAllFilters);
+      
+      // Real-time resource filter
+      document.getElementById('resourceFilter').addEventListener('change', handleFilter);
       
       // Store interaction buttons
       document.addEventListener('click', function(e) {
@@ -355,7 +372,7 @@
       const filters = {
         district: document.getElementById('districtFilter').value,
         type: document.getElementById('typeFilter').value,
-        search: document.getElementById('searchFilter').value
+        resource: document.getElementById('resourceFilter').value
       };
 
       try {
@@ -559,6 +576,14 @@
           }
         });
       });
+    }
+
+    // Clear all filters function
+    function clearAllFilters() {
+      document.getElementById('districtFilter').value = 'all';
+      document.getElementById('typeFilter').value = 'all';
+      document.getElementById('resourceFilter').value = 'all';
+      handleFilter();
     }
 
     // Debounce function for search

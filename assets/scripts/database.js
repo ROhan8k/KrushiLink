@@ -180,10 +180,10 @@ class KrushiLinkDB {
         query = query.eq('type', filters.type);
       }
       
-      // Apply search filter
-      if (filters.search && filters.search.trim()) {
-        const searchTerm = filters.search.toLowerCase();
-        query = query.or(`name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`);
+      // Apply resource type filter
+      if (filters.resource && filters.resource !== 'all') {
+        // Filter stores that have the selected resource in their services array
+        query = query.contains('services', [filters.resource]);
       }
       
       const { data: stores, error } = await query.order('id');
