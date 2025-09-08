@@ -17,18 +17,10 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)
 
-# Static file serving
+# Static file serving - IMPORTANT: Keep this AFTER all API routes
 @app.route('/')
 def serve_index():
     return send_file('index.html')
-
-@app.route('/<path:filename>')
-def serve_static(filename):
-    try:
-        return send_file(filename)
-    except:
-        # If file not found, serve index.html for SPA routing
-        return send_file('index.html')
 
 # Database connection
 def get_db_connection():
@@ -284,6 +276,15 @@ def delete_comment(comment_id):
     except Exception as e:
         print(f"Error deleting comment: {e}")
         return jsonify({"error": str(e)}), 500
+
+# Catch-all route for static files - MUST be last
+@app.route('/<path:filename>')
+def serve_static(filename):
+    try:
+        return send_file(filename)
+    except:
+        # If file not found, serve index.html for SPA routing
+        return send_file('index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
