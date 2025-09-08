@@ -121,10 +121,11 @@ a:hover {
 
 /* Centered register box */
 .register-section {
-  min-height: 100vh;
+  min-height: calc(100vh - 200px);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 2rem;
 }
 
 .register-card {
