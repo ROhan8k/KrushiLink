@@ -96,141 +96,28 @@ class KrushiLinkDB {
 
   async getAllStores() {
     try {
-      // Simulate API call to our database
-      // In a real implementation, this would call your backend API
-      const stores = [
-        {
-          id: 1,
-          name: 'Maharashtra State Agricultural Marketing Board Store',
-          type: 'government',
-          address: 'Plot No. 15, MIDC Area, Pune',
-          district: 'Pune',
-          phone: '+91-20-2561-7890',
-          email: 'pune@msamb.gov.in',
-          image_url: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=400',
-          description: 'Government agricultural store providing subsidized seeds, fertilizers and farming equipment with various schemes available.',
-          services: ['Seeds', 'Fertilizers', 'Pesticides', 'Farm Equipment', 'Government Schemes'],
-          contact_person: 'Mr. Rajesh Patil',
-          rating: 4.2,
-          is_verified: true,
-          schemes: [
-            {
-              name: 'Pradhan Mantri Krishi Sinchai Yojana',
-              description: 'Water conservation and irrigation development scheme providing subsidies for drip and sprinkler irrigation systems.',
-              subsidy_percentage: 55.00
-            },
-            {
-              name: 'Soil Health Card Scheme',
-              description: 'Free soil testing and health card provision with recommendations for optimal fertilizer use.',
-              subsidy_percentage: 100.00
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: 'Krishi Seva Kendra - Nashik',
-          type: 'government',
-          address: 'Near Collector Office, Nashik Road',
-          district: 'Nashik',
-          phone: '+91-253-245-6789',
-          email: 'nashik@ksk.gov.in',
-          image_url: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400',
-          description: 'District agricultural extension center providing technical support and government scheme assistance.',
-          services: ['Technical Support', 'Soil Testing', 'Seeds', 'Government Schemes', 'Training Programs'],
-          contact_person: 'Dr. Priya Sharma',
-          rating: 4.5,
-          is_verified: true,
-          schemes: [
-            {
-              name: 'Kisan Credit Card Scheme',
-              description: 'Credit facility for farmers to meet agricultural expenses and emergency needs.',
-              subsidy_percentage: 0.00
-            },
-            {
-              name: 'National Mission on Sustainable Agriculture',
-              description: 'Promote sustainable agricultural practices through training and financial assistance.',
-              subsidy_percentage: 75.00
-            }
-          ]
-        },
-        {
-          id: 3,
-          name: 'Agro World - Aurangabad',
-          type: 'private',
-          address: 'Shop No. 45, Agricultural Market, Aurangabad',
-          district: 'Aurangabad',
-          phone: '+91-240-234-5678',
-          email: 'info@agroworld.com',
-          image_url: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400',
-          description: 'Private agricultural store offering premium quality seeds, modern farming tools and expert consultation services.',
-          services: ['Premium Seeds', 'Modern Tools', 'Consultation', 'Organic Products', 'Irrigation Systems'],
-          contact_person: 'Mr. Santosh Joshi',
-          rating: 4.0,
-          is_verified: true,
-          schemes: []
-        },
-        {
-          id: 4,
-          name: 'FarmTech Solutions',
-          type: 'private',
-          address: '123 Main Road, Kolhapur',
-          district: 'Kolhapur',
-          phone: '+91-231-234-5678',
-          email: 'contact@farmtech.in',
-          image_url: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400',
-          description: 'Advanced agricultural technology store specializing in modern farming equipment and smart irrigation solutions.',
-          services: ['Smart Irrigation', 'Drones', 'Sensors', 'Modern Equipment', 'Technology Training'],
-          contact_person: 'Ms. Kavita Desai',
-          rating: 4.3,
-          is_verified: true,
-          schemes: []
-        },
-        {
-          id: 5,
-          name: 'Maharaja Agri Center',
-          type: 'government',
-          address: 'Government Building Complex, Nagpur',
-          district: 'Nagpur',
-          phone: '+91-712-234-5678',
-          email: 'nagpur@maharaja.gov.in',
-          image_url: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=400',
-          description: 'Central government agricultural center providing subsidized inputs and comprehensive farming support.',
-          services: ['Subsidized Inputs', 'Crop Insurance', 'Government Schemes', 'Storage Facilities', 'Market Linkage'],
-          contact_person: 'Mr. Anil Kumar',
-          rating: 4.1,
-          is_verified: true,
-          schemes: [
-            {
-              name: 'Rashtriya Krishi Vikas Yojana',
-              description: 'Comprehensive agricultural development scheme with focus on increasing productivity and farmers income.',
-              subsidy_percentage: 60.00
-            },
-            {
-              name: 'National Food Security Mission',
-              description: 'Increase production of rice, wheat, pulses through improved seeds and farming practices.',
-              subsidy_percentage: 50.00
-            }
-          ]
-        },
-        {
-          id: 6,
-          name: 'Green Valley Agro Store',
-          type: 'private',
-          address: 'Near Bus Stand, Solapur',
-          district: 'Solapur',
-          phone: '+91-217-234-5678',
-          email: 'sales@greenvalley.com',
-          image_url: 'https://images.unsplash.com/photo-1473163928189-364b2c4e1135?w=400',
-          description: 'Family-owned store providing quality agricultural inputs and personalized farming advice for three generations.',
-          services: ['Traditional Seeds', 'Organic Fertilizers', 'Hand Tools', 'Personal Advice', 'Local Varieties'],
-          contact_person: 'Mr. Govind Patil',
-          rating: 3.9,
-          is_verified: true,
-          schemes: []
-        }
-      ];
+      // Fetch stores from Supabase with their related schemes
+      const { data: stores, error } = await supabase
+        .from('stores')
+        .select(`
+          *,
+          schemes (
+            id,
+            name,
+            description,
+            subsidy_percentage,
+            eligibility,
+            application_process
+          )
+        `)
+        .order('id');
       
-      return stores;
+      if (error) {
+        console.error('Error fetching stores:', error);
+        return [];
+      }
+      
+      return stores || [];
     } catch (error) {
       console.error('Error fetching stores:', error);
       return [];
@@ -238,41 +125,101 @@ class KrushiLinkDB {
   }
 
   async getStoreById(id) {
-    const stores = await this.getAllStores();
-    return stores.find(store => store.id === parseInt(id));
+    try {
+      const { data: store, error } = await supabase
+        .from('stores')
+        .select(`
+          *,
+          schemes (
+            id,
+            name,
+            description,
+            subsidy_percentage,
+            eligibility,
+            application_process
+          )
+        `)
+        .eq('id', id)
+        .single();
+      
+      if (error) {
+        console.error('Error fetching store:', error);
+        return null;
+      }
+      
+      return store;
+    } catch (error) {
+      console.error('Error fetching store by ID:', error);
+      return null;
+    }
   }
 
   async filterStores(filters) {
-    let stores = await this.getAllStores();
-    
-    if (filters.district && filters.district !== 'all') {
-      stores = stores.filter(store => 
-        store.district.toLowerCase() === filters.district.toLowerCase()
-      );
+    try {
+      let query = supabase
+        .from('stores')
+        .select(`
+          *,
+          schemes (
+            id,
+            name,
+            description,
+            subsidy_percentage,
+            eligibility,
+            application_process
+          )
+        `);
+      
+      // Apply district filter
+      if (filters.district && filters.district !== 'all') {
+        query = query.ilike('district', filters.district);
+      }
+      
+      // Apply type filter
+      if (filters.type && filters.type !== 'all') {
+        query = query.eq('type', filters.type);
+      }
+      
+      // Apply search filter
+      if (filters.search && filters.search.trim()) {
+        const searchTerm = filters.search.toLowerCase();
+        query = query.or(`name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`);
+      }
+      
+      const { data: stores, error } = await query.order('id');
+      
+      if (error) {
+        console.error('Error filtering stores:', error);
+        return [];
+      }
+      
+      return stores || [];
+    } catch (error) {
+      console.error('Error in filterStores:', error);
+      return [];
     }
-    
-    if (filters.type && filters.type !== 'all') {
-      stores = stores.filter(store => store.type === filters.type);
-    }
-    
-    if (filters.search && filters.search.trim()) {
-      const searchTerm = filters.search.toLowerCase();
-      stores = stores.filter(store => 
-        store.name.toLowerCase().includes(searchTerm) ||
-        store.description.toLowerCase().includes(searchTerm) ||
-        store.services.some(service => service.toLowerCase().includes(searchTerm))
-      );
-    }
-    
-    return stores;
   }
 
   // ================= COMMENT OPERATIONS =================
 
   async getComments(storeId) {
-    // Simulate getting comments from database
-    // In real implementation, this would fetch from your backend
-    return JSON.parse(localStorage.getItem(`comments_${storeId}`)) || [];
+    try {
+      const { data: comments, error } = await supabase
+        .from('comments')
+        .select('*')
+        .eq('store_id', storeId)
+        .order('created_at', { ascending: false });
+      
+      if (error) {
+        console.error('Error fetching comments:', error);
+        return [];
+      }
+      
+      return comments || [];
+    } catch (error) {
+      console.error('Error in getComments:', error);
+      return [];
+    }
   }
 
   async addComment(storeId, comment, rating) {
@@ -280,19 +227,31 @@ class KrushiLinkDB {
       throw new Error('You must be logged in to add a comment');
     }
 
-    const comments = await this.getComments(storeId);
-    const newComment = {
-      id: Date.now(),
-      user_email: this.currentUser.email,
-      user_name: this.currentUser.user_metadata?.fullName || this.currentUser.email.split('@')[0],
-      comment: comment.trim(),
-      rating: parseInt(rating),
-      created_at: new Date().toISOString()
-    };
+    try {
+      const newComment = {
+        store_id: parseInt(storeId),
+        user_email: this.currentUser.email,
+        user_name: this.currentUser.user_metadata?.fullName || this.currentUser.email.split('@')[0],
+        comment: comment.trim(),
+        rating: parseInt(rating)
+      };
 
-    comments.push(newComment);
-    localStorage.setItem(`comments_${storeId}`, JSON.stringify(comments));
-    return newComment;
+      const { data, error } = await supabase
+        .from('comments')
+        .insert([newComment])
+        .select()
+        .single();
+      
+      if (error) {
+        console.error('Error adding comment:', error);
+        throw new Error('Failed to add comment. Please try again.');
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('Error in addComment:', error);
+      throw error;
+    }
   }
 
   async deleteComment(storeId, commentId) {
@@ -300,21 +259,36 @@ class KrushiLinkDB {
       throw new Error('You must be logged in to delete a comment');
     }
 
-    const comments = await this.getComments(storeId);
-    const commentIndex = comments.findIndex(c => c.id === commentId);
-    
-    if (commentIndex === -1) {
-      throw new Error('Comment not found');
+    try {
+      // First, check if the comment exists and belongs to the current user
+      const { data: comment, error: fetchError } = await supabase
+        .from('comments')
+        .select('*')
+        .eq('id', commentId)
+        .eq('store_id', storeId)
+        .eq('user_email', this.currentUser.email)
+        .single();
+      
+      if (fetchError || !comment) {
+        throw new Error('Comment not found or you can only delete your own comments');
+      }
+      
+      // Delete the comment
+      const { error: deleteError } = await supabase
+        .from('comments')
+        .delete()
+        .eq('id', commentId);
+      
+      if (deleteError) {
+        console.error('Error deleting comment:', deleteError);
+        throw new Error('Failed to delete comment. Please try again.');
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error in deleteComment:', error);
+      throw error;
     }
-
-    const comment = comments[commentIndex];
-    if (comment.user_email !== this.currentUser.email) {
-      throw new Error('You can only delete your own comments');
-    }
-
-    comments.splice(commentIndex, 1);
-    localStorage.setItem(`comments_${storeId}`, JSON.stringify(comments));
-    return true;
   }
 
   // ================= UTILITY FUNCTIONS =================
